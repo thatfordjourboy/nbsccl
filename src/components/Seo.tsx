@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-const DEFAULT_TITLE = "NB Sebastian — Building Tomorrow's Global Economy";
+const BRAND = 'NBSCCL';
+const DEFAULT_TITLE = `${BRAND}`;
 const DEFAULT_DESC = "Construction, commodities, manufacturing, and global trade solutions.";
 
 export function Seo() {
@@ -10,6 +11,20 @@ export function Seo() {
   useEffect(() => {
     const siteUrl = import.meta.env.VITE_SITE_URL || 'https://example.com';
     const url = siteUrl.replace(/\/$/, '') + pathname + search;
+
+    const routeTitleMap: Record<string, string> = {
+      '/': `Home - ${BRAND}`,
+      '/about': `About - ${BRAND}`,
+      '/construction': `Construction - ${BRAND}`,
+      '/commodities': `Commodities - ${BRAND}`,
+      '/import-export': `Import & Export - ${BRAND}`,
+      '/gold': `Gold - ${BRAND}`,
+      '/manufacturing': `Manufacturing - ${BRAND}`,
+      '/merchandise': `Merchandise - ${BRAND}`,
+      '/contact': `Contact - ${BRAND}`,
+      '/privacy': `Privacy Policy - ${BRAND}`,
+      '/terms': `Terms of Service - ${BRAND}`
+    };
 
     const ensureMeta = (name: string, attr: 'name' | 'property' = 'name') => {
       let tag = document.querySelector(`meta[${attr}="${name}"]`) as HTMLMetaElement | null;
@@ -26,8 +41,8 @@ export function Seo() {
       tag.setAttribute('content', content);
     };
 
-    // Title/Description defaults (can be overridden per-page later)
-    if (!document.title) document.title = DEFAULT_TITLE;
+    // Title per route (fallback to default)
+    document.title = routeTitleMap[pathname] || DEFAULT_TITLE;
     setMeta('description', DEFAULT_DESC);
 
     // Canonical
