@@ -81,7 +81,7 @@ export function SimpleHomePage() {
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
-            <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-gray-900">
+            <Button variant="outline" size="lg" className="border-white text-white bg-transparent hover:bg-white hover:text-gray-900">
               <Link to="/contact">Get In Touch</Link>
             </Button>
           </div>
@@ -154,7 +154,7 @@ export function SimpleHomePage() {
           <p className="text-xl text-blue-100 mb-8">
             Let's discuss how our expertise can drive your business forward.
           </p>
-          <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600">
+          <Button size="lg" variant="outline" className="border-white text-white bg-transparent hover:bg-white hover:text-blue-600">
             <Link to="/contact" className="flex items-center">
               Contact Us Today
               <ArrowRight className="ml-2 h-5 w-5" />

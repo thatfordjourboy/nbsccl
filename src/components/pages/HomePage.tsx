@@ -97,7 +97,7 @@ export function HomePage() {
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
-            <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-gray-900">
+            <Button variant="outline" size="lg" className="border-white text-white bg-transparent hover:bg-white hover:text-gray-900">
               <Link to="/contact">Get In Touch</Link>
             </Button>
           </motion.div>
@@ -230,7 +230,7 @@ export function HomePage() {
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600">
+            <Button size="lg" variant="outline" className="border-white text-white bg-transparent hover:bg-white hover:text-blue-600">
               <Link to="/contact" className="flex items-center">
                 Contact Us Today
                 <ArrowRight className="ml-2 h-5 w-5" />

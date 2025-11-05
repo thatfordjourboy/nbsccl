@@ -307,7 +307,7 @@ export function MerchandisePage() {
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-indigo-600">
+            <Button size="lg" variant="outline" className="border-white text-white bg-transparent hover:bg-white hover:text-indigo-600">
               <Link to="/contact">
                 Browse Products
               </Link>

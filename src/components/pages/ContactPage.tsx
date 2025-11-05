@@ -343,7 +343,7 @@ export function ContactPage() {
             viewport={{ once: true }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600">
+            <Button size="lg" variant="outline" className="border-white text-white bg-transparent hover:bg-white hover:text-blue-600">
               Schedule Consultation
             </Button>
             <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
