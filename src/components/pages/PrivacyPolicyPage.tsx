@@ -37,12 +37,19 @@ export function PrivacyPolicyPage() {
 
           <div>
             <h2 className="text-2xl font-semibold text-gray-900">4. Legal bases</h2>
-            <p className="text-gray-700 mt-3">Depending on your location, processing is based on consent, contract performance, legitimate interests (e.g., site security, service improvement), or legal compliance.</p>
+            <p className="text-gray-700 mt-3">We process personal data in accordance with Ghana&apos;s Data Protection Act, 2012 (Act 843). Depending on your location, processing is based on consent, contract performance, legitimate interests (e.g., site security, service improvement), or legal compliance.</p>
           </div>
 
           <div>
-            <h2 className="text-2xl font-semibold text-gray-900">5. Sharing</h2>
-            <p className="text-gray-700 mt-3">We do not sell personal data. We may share with service providers that help us run our business (e.g., hosting, analytics, communications) under contracts that require them to protect your data. We may disclose where required by law or to protect rights and safety.</p>
+            <h2 className="text-2xl font-semibold text-gray-900">5. Sharing and third-party services</h2>
+            <p className="text-gray-700 mt-3">We do not sell personal data. We share it only with service providers that help us run this website, under contracts that require them to protect it, or where required by law. This website uses:</p>
+            <ul className="list-disc pl-6 text-gray-700 mt-3 space-y-2">
+              <li><span className="font-medium">Vercel</span> (hosting): processes your IP address and request data to serve the site.</li>
+              <li><span className="font-medium">Resend</span> (email delivery): receives the contents of the contact form so it can be delivered to our team.</li>
+              <li><span className="font-medium">Cloudflare Turnstile</span> (spam protection on the contact form): may process your IP address and browser signals.</li>
+              <li><span className="font-medium">Google Maps</span> (embedded map on the Contact page): Google may set cookies and collect usage data when the map loads, under Google&apos;s privacy policy.</li>
+              <li><span className="font-medium">Unsplash</span> (image delivery): images are loaded from Unsplash servers, which receive your IP address.</li>
+            </ul>
           </div>
 
           <div>
@@ -80,7 +87,7 @@ export function PrivacyPolicyPage() {
             <p className="text-gray-700 mt-3">We may update this policy to reflect operational or legal changes. We will update the “Last updated” date and, where required, notify you.</p>
           </div>
 
-          <div className="text-sm text-gray-500">Last updated: {new Date().toLocaleDateString()}</div>
+          <div className="text-sm text-gray-500">Last updated: 10 October 2026</div>
 
           <div className="pt-4">
             <Link to="/" className="text-blue-600">Back to Home</Link>

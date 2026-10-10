@@ -1,49 +1,28 @@
+# NB Sebastian Commodities Company Ltd.
 
-  # NB Sebastian Commodities Company Ltd.
+Corporate website for NB Sebastian: construction, commodities trading, manufacturing, gold purchasing and global trade.
 
-  Corporate multi-business website for NB Sebastian — Construction, commodities trading, manufacturing, and global trade solutions.
+- **Working on the code?** Read [CLAUDE.md](CLAUDE.md) (rules, layout, commands).
+- **Status, open items, changelog:** [PROJECT.md](PROJECT.md).
 
-  ## Development
+## Quick start
 
-  ```bash
-  npm install
-  npm run dev
-  ```
+```bash
+npm install
+npm run dev     # http://localhost:3000
+npm test
+npm run build   # output in build/
+```
 
-  ## Deployment to Vercel
+## Deploying (Vercel)
 
-  ### Option 1: Vercel Dashboard (Recommended)
-  1. Go to [vercel.com](https://vercel.com) and sign in
-  2. Click "Add New Project"
-  3. Import your GitHub repository: `thatfordjourboy/nbsccl`
-  4. Vercel will auto-detect Vite configuration
-  5. Add environment variables:
-     - `VITE_SITE_URL` = `https://www.nbsccl.com`
-     - `VITE_CONTACT_API_URL` = (your contact form endpoint URL, if applicable)
-  6. Click "Deploy"
+1. Import `thatfordjourboy/nbsccl` in Vercel. Build settings come from `vercel.json`.
+2. Set the environment variables from [.env.example](.env.example):
+   - `VITE_SITE_URL`: production URL, e.g. `https://www.nbsccl.com`
+   - `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`: required for the contact form to deliver mail
+   - `VITE_TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY`: optional Cloudflare Turnstile spam protection
+3. Add the custom domain under Settings → Domains.
 
-  ### Option 2: Vercel CLI
-  ```bash
-  npm i -g vercel
-  vercel
-  ```
+## Stack
 
-  ### Environment Variables
-  Set these in Vercel Dashboard → Project Settings → Environment Variables:
-  - `VITE_SITE_URL`: Production site URL (e.g., `https://www.nbsccl.com`)
-  - `VITE_CONTACT_API_URL`: Contact form API endpoint (optional)
-
-  ### Custom Domain
-  After deployment, add your custom domain in Vercel Dashboard → Settings → Domains:
-  - `www.nbsccl.com`
-  - Vercel will provide DNS records to configure
-
-  ## Features
-
-  - React 18 + TypeScript + Vite
-  - React Router with lazy-loaded routes
-  - TailwindCSS with shadcn/ui components
-  - Form validation with Zod + React Hook Form
-  - SEO optimized (meta tags, sitemap, robots.txt, structured data)
-  - Security headers and CSP
-  - Error boundaries and scroll-to-top on navigation
+React 18, TypeScript, Vite, Tailwind CSS v4, React Router 7, motion, Vercel Functions (`api/`).

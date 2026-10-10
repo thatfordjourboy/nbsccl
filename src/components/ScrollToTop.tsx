@@ -7,7 +7,7 @@ export function ScrollToTop() {
   useEffect(() => {
     // If navigating to a hash anchor, let the browser handle native anchor scrolling
     if (location.hash) return;
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    window.scrollTo(0, 0);
   }, [location.pathname, location.search]);
 
   return null;

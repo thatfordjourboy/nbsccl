@@ -340,8 +340,8 @@ export function ConstructionPage() {
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            <Button size="lg" variant="outline" className="border-white text-white bg-transparent hover:bg-white hover:text-blue-600">
-              <Link to="/contact">
+            <Button asChild size="lg" variant="outline" className="border-white text-white bg-transparent hover:bg-white hover:text-blue-600">
+              <Link to="/contact?service=construction">
                 Start Your Project
               </Link>
             </Button>

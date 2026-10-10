@@ -13,8 +13,7 @@ export function Header() {
     { name: 'About', href: '/about' },
     { 
       name: 'Services', 
-      href: '#',
-      subItems: [
+            subItems: [
         { name: 'Construction', href: '/construction' },
         { name: 'Commodities', href: '/commodities' },
         { name: 'Import & Export', href: '/import-export' },
@@ -39,7 +38,7 @@ export function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8">
+          <nav aria-label="Main" className="hidden lg:flex items-center space-x-8">
             {navigation.map((item) => (
               <div key={item.name} className="relative">
                 {item.subItems ? (
@@ -47,8 +46,20 @@ export function Header() {
                     className="relative"
                     onMouseEnter={() => setHoveredService(true)}
                     onMouseLeave={() => setHoveredService(false)}
+                    onBlur={(e) => {
+                      if (!e.currentTarget.contains(e.relatedTarget)) setHoveredService(false);
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Escape') setHoveredService(false);
+                    }}
                   >
-                    <button className="text-foreground hover:text-primary transition-colors duration-200 py-2">
+                    <button
+                      type="button"
+                      aria-expanded={hoveredService}
+                      aria-controls="services-menu"
+                      onClick={() => setHoveredService((open) => !open)}
+                      className="text-foreground hover:text-primary transition-colors duration-200 py-2"
+                    >
                       {item.name}
                     </button>
                     <AnimatePresence>
@@ -58,12 +69,14 @@ export function Header() {
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: 10 }}
                           transition={{ duration: 0.2 }}
+                          id="services-menu"
                           className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-100 py-2"
                         >
                           {item.subItems.map((subItem) => (
                             <Link
                               key={subItem.name}
                               to={subItem.href}
+                              onClick={() => setHoveredService(false)}
                               className="block px-4 py-2 text-sm text-foreground hover:bg-gray-50 hover:text-primary transition-colors duration-200"
                             >
                               {subItem.name}
@@ -92,6 +105,9 @@ export function Header() {
             variant="ghost"
             size="sm"
             className="lg:hidden"
+            aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -106,6 +122,7 @@ export function Header() {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
+              id="mobile-menu"
               className="lg:hidden border-t border-gray-100 py-4"
             >
               <nav className="flex flex-col space-y-4">

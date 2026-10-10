@@ -232,8 +232,8 @@ export function GoldPage() {
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            <Button size="lg" variant="outline" className="border-white text-white bg-transparent hover:bg-white hover:text-yellow-600">
-              <Link to="/contact">
+            <Button asChild size="lg" variant="outline" className="border-white text-white bg-transparent hover:bg-white hover:text-yellow-600">
+              <Link to="/contact?service=gold">
                 Get Gold Quote
               </Link>
             </Button>

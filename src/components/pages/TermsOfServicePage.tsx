@@ -61,7 +61,7 @@ export function TermsOfServicePage() {
             <p className="text-gray-700 mt-3">Questions about these Terms? Contact us at <a className="text-blue-600" href="mailto:legal@nbsebastian.com">legal@nbsebastian.com</a>.</p>
           </div>
 
-          <div className="text-sm text-gray-500">Last updated: {new Date().toLocaleDateString()}</div>
+          <div className="text-sm text-gray-500">Last updated: 10 October 2026</div>
 
           <div className="pt-4">
             <Link to="/" className="text-blue-600">Back to Home</Link>

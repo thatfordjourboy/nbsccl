@@ -4,12 +4,9 @@ import { Card } from '../ui/card';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Textarea } from '../ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { Label } from '../ui/label';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { useEffect, useState, type FormEvent } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { toast } from 'sonner';
 
 const contactInfo = [
@@ -39,52 +36,59 @@ const contactInfo = [
   }
 ];
 
-// Removed global offices content per request
+const SERVICES = [
+  ['construction', 'Construction'],
+  ['commodities', 'Commodities'],
+  ['import-export', 'Import & Export'],
+  ['gold', 'Gold Purchasing'],
+  ['manufacturing', 'Manufacturing'],
+  ['merchandise', 'General Merchandise'],
+  ['other', 'Other'],
+] as const;
 
-const contactSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters').max(80),
-  email: z.string().email('Enter a valid email address').max(120),
-  phone: z.string().max(24).optional().or(z.literal('').transform(() => undefined)),
-  company: z.string().max(120).optional().or(z.literal('').transform(() => undefined)),
-  service: z.enum(['construction','commodities','import-export','gold','manufacturing','merchandise','other']).optional(),
-  message: z.string().min(10, 'Please provide at least 10 characters').max(2000)
-});
+const FALLBACK_EMAIL = 'info@nbsebastian.com';
+const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY as string | undefined;
 
-type ContactSchema = z.infer<typeof contactSchema>;
+declare global {
+  interface Window { turnstile?: { reset: () => void } }
+}
 
 export function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [searchParams] = useSearchParams();
+  const requested = searchParams.get('service') ?? '';
+  const presetService = SERVICES.some(([value]) => value === requested) ? requested : '';
 
-  const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm<ContactSchema>({
-    resolver: zodResolver(contactSchema),
-    defaultValues: {
-      name: '', email: '', phone: '', company: '', service: undefined, message: ''
-    }
-  });
+  useEffect(() => {
+    if (!TURNSTILE_SITE_KEY || document.getElementById('turnstile-script')) return;
+    const script = document.createElement('script');
+    script.id = 'turnstile-script';
+    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+    script.async = true;
+    document.head.appendChild(script);
+  }, []);
 
-  const onSubmit = async (data: ContactSchema) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
     setIsSubmitting(true);
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 15000);
     try {
-      const endpoint = import.meta.env.VITE_CONTACT_API_URL;
-      if (endpoint) {
-        const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 10000);
-        const res = await fetch(endpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
-          signal: controller.signal
-        });
-        clearTimeout(timeout);
-        if (!res.ok) throw new Error(`Request failed: ${res.status}`);
-      } else {
-        await new Promise(resolve => setTimeout(resolve, 1500));
-      }
-      toast.success('Message sent successfully! We\'ll get back to you within 24 hours.');
-      reset();
-    } catch (err) {
-      toast.error('Failed to send message. Please try again later.');
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(Object.fromEntries(new FormData(form))),
+        signal: controller.signal,
+      });
+      if (!res.ok) throw new Error(`Request failed: ${res.status}`);
+      toast.success("Message sent! We'll get back to you within 24 hours.");
+      form.reset();
+    } catch {
+      toast.error(`Sorry, your message could not be sent. Please email us directly at ${FALLBACK_EMAIL}.`, { duration: 10000 });
     } finally {
+      clearTimeout(timeout);
+      window.turnstile?.reset();
       setIsSubmitting(false);
     }
   };
@@ -125,92 +129,70 @@ export function ContactPage() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <Card className="p-8">
+              <Card className="p-8 relative">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">Send Us a Message</h2>
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" noValidate>
+                <form id="contact-form" onSubmit={onSubmit} className="space-y-6 scroll-mt-24">
+                  {/* Honeypot: invisible to people, bots fill it in. Rejected server-side in api/contact.js. */}
+                  <div aria-hidden="true" className="absolute -left-[9999px]">
+                    <label htmlFor="website">Website</label>
+                    <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+                  </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="name">Full Name *</Label>
-                      <Input
-                        id="name"
-                        type="text"
-                        aria-invalid={!!errors.name}
-                        {...register('name')}
-                        placeholder="John Doe"
-                      />
-                      {errors.name && (<p className="text-sm text-red-600 mt-1">{errors.name.message}</p>)}
+                      <Input id="name" name="name" type="text" required minLength={2} maxLength={80} autoComplete="name" placeholder="Jane Mensah" />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="email">Email Address *</Label>
-                      <Input
-                        id="email"
-                        type="email"
-                        aria-invalid={!!errors.email}
-                        {...register('email')}
-                        placeholder="john@company.com"
-                      />
-                      {errors.email && (<p className="text-sm text-red-600 mt-1">{errors.email.message}</p>)}
+                      <Input id="email" name="email" type="email" required maxLength={120} autoComplete="email" placeholder="jane@company.com" />
                     </div>
                   </div>
-                  
+
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="phone">Phone Number</Label>
-                      <Input
-                        id="phone"
-                        type="tel"
-                        aria-invalid={!!errors.phone}
-                        {...register('phone')}
-                        placeholder="+1 (555) 123-4567"
-                      />
-                      {errors.phone && (<p className="text-sm text-red-600 mt-1">{errors.phone.message}</p>)}
+                      <Input id="phone" name="phone" type="tel" maxLength={24} autoComplete="tel" placeholder="+233 20 000 0000" />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="company">Company</Label>
-                      <Input
-                        id="company"
-                        type="text"
-                        aria-invalid={!!errors.company}
-                        {...register('company')}
-                        placeholder="Company Name"
-                      />
-                      {errors.company && (<p className="text-sm text-red-600 mt-1">{errors.company.message}</p>)}
+                      <Input id="company" name="company" type="text" maxLength={120} autoComplete="organization" placeholder="Company Name" />
                     </div>
                   </div>
 
                   <div className="space-y-2">
-                    <Label>Service of Interest</Label>
-                    <Select onValueChange={(value) => setValue('service', value as ContactSchema['service'])}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select a service" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="construction">Construction</SelectItem>
-                        <SelectItem value="commodities">Commodities</SelectItem>
-                        <SelectItem value="import-export">Import & Export</SelectItem>
-                        <SelectItem value="gold">Gold Purchasing</SelectItem>
-                        <SelectItem value="manufacturing">Manufacturing</SelectItem>
-                        <SelectItem value="merchandise">General Merchandise</SelectItem>
-                        <SelectItem value="other">Other</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <Label htmlFor="service">Service of Interest</Label>
+                    <select
+                      id="service"
+                      name="service"
+                      key={presetService}
+                      defaultValue={presetService}
+                      className="flex h-9 w-full rounded-md border border-input bg-input-background px-3 py-1 text-base md:text-sm outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+                    >
+                      <option value="">Select a service</option>
+                      {SERVICES.map(([value, label]) => (
+                        <option key={value} value={value}>{label}</option>
+                      ))}
+                    </select>
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="message">Message *</Label>
                     <Textarea
                       id="message"
-                      aria-invalid={!!errors.message}
-                      {...register('message')}
+                      name="message"
+                      required
+                      minLength={10}
+                      maxLength={2000}
                       placeholder="Tell us about your project or inquiry..."
                       rows={5}
                     />
-                    {errors.message && (<p className="text-sm text-red-600 mt-1">{errors.message.message}</p>)}
                   </div>
 
-                  <Button 
-                    type="submit" 
-                    size="lg" 
+                  {TURNSTILE_SITE_KEY && <div className="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY} />}
+
+                  <Button
+                    type="submit"
+                    size="lg"
                     className="w-full"
                     disabled={isSubmitting}
                   >
@@ -302,13 +284,12 @@ export function ContactPage() {
             <div className="w-full h-[450px]">
               <iframe
                 title="NB Sebastian Location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3970.5526948158017!2d-0.0984188!3d5.632841599999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdf85d0b29a0797%3A0x9dd476e78fefbff5!2sCliff%20J%20Enterprise!5e0!3m2!1sen!2sgh!4v1762361236229!5m2!1sen!2sgh"
+                src="https://www.google.com/maps?q=Inkoom+Hospital,+Spintex+Road,+Accra,+Ghana&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
               />
             </div>
           </motion.div>
@@ -343,11 +324,11 @@ export function ContactPage() {
             viewport={{ once: true }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <Button size="lg" variant="outline" className="border-white text-white bg-transparent hover:bg-white hover:text-blue-600">
-              Schedule Consultation
+            <Button asChild size="lg" variant="outline" className="border-white text-white bg-transparent hover:bg-white hover:text-blue-600">
+              <a href="tel:+233200252498">Call to Schedule a Consultation</a>
             </Button>
-            <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
-              Request Quote
+            <Button asChild size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
+              <a href="#contact-form">Request a Quote</a>
             </Button>
           </motion.div>
         </div>

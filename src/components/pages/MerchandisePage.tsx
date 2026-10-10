@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { ShoppingBag, Package, Truck, Globe, Zap, Shield } from 'lucide-react';
+import { ShoppingBag, Package, Globe, Zap, Shield } from 'lucide-react';
 import { Card } from '../ui/card';
 import { Button } from '../ui/button';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
@@ -307,8 +307,8 @@ export function MerchandisePage() {
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            <Button size="lg" variant="outline" className="border-white text-white bg-transparent hover:bg-white hover:text-indigo-600">
-              <Link to="/contact">
+            <Button asChild size="lg" variant="outline" className="border-white text-white bg-transparent hover:bg-white hover:text-indigo-600">
+              <Link to="/contact?service=merchandise">
                 Browse Products
               </Link>
             </Button>

@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { MotionConfig } from 'motion/react';
 import { Suspense, lazy } from 'react';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
@@ -17,18 +18,20 @@ const ManufacturingPage = lazy(() => import('./components/pages/ManufacturingPag
 const MerchandisePage = lazy(() => import('./components/pages/MerchandisePage').then(m => ({ default: m.MerchandisePage })));
 const ContactPage = lazy(() => import('./components/pages/ContactPage').then(m => ({ default: m.ContactPage })));
 const PrivacyPolicyPage = lazy(() => import('./components/pages/PrivacyPolicyPage').then(m => ({ default: m.PrivacyPolicyPage })));
+const NotFoundPage = lazy(() => import('./components/pages/NotFoundPage').then(m => ({ default: m.NotFoundPage })));
 const TermsOfServicePage = lazy(() => import('./components/pages/TermsOfServicePage').then(m => ({ default: m.TermsOfServicePage })));
 
 export default function App() {
   return (
     <Router>
+      <MotionConfig reducedMotion="user">
       <ErrorBoundary>
         <div className="min-h-screen flex flex-col">
           <Header />
           <main className="flex-1">
             <ScrollToTop />
             <Seo />
-            <Suspense fallback={<div className="p-8">Loading...</div>}>
+            <Suspense fallback={<div className="p-8" role="status">Loading...</div>}>
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/about" element={<AboutPage />} />
@@ -41,9 +44,7 @@ export default function App() {
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="/privacy" element={<PrivacyPolicyPage />} />
                 <Route path="/terms" element={<TermsOfServicePage />} />
-                {/* Handle preview_page.html and any other unmatched routes */}
-                <Route path="/preview_page.html" element={<Navigate to="/" replace />} />
-                <Route path="*" element={<Navigate to="/" replace />} />
+                <Route path="*" element={<NotFoundPage />} />
               </Routes>
             </Suspense>
           </main>
@@ -51,6 +52,7 @@ export default function App() {
           <Toaster />
         </div>
       </ErrorBoundary>
+      </MotionConfig>
     </Router>
   );
 }

@@ -1,0 +1,13 @@
+[
+  { "path": "/", "title": "Home - NBSCCL", "description": "NB Sebastian Commodities Company Ltd. — construction, commodities trading, manufacturing, gold purchasing and global trade from Accra, Ghana." },
+  { "path": "/about", "title": "About Us - NBSCCL", "description": "Who we are: the history, values and leadership of NB Sebastian Commodities Company Ltd." },
+  { "path": "/construction", "title": "Construction - NBSCCL", "description": "Residential, commercial and infrastructure construction services by NB Sebastian." },
+  { "path": "/commodities", "title": "Commodities Trading - NBSCCL", "description": "Agricultural, energy and metals commodities trading with NB Sebastian." },
+  { "path": "/import-export", "title": "Import & Export - NBSCCL", "description": "International import, export and logistics solutions from NB Sebastian." },
+  { "path": "/gold", "title": "Gold Purchasing - NBSCCL", "description": "Responsible gold purchasing and trading services from NB Sebastian." },
+  { "path": "/manufacturing", "title": "Manufacturing - NBSCCL", "description": "Manufacturing capabilities and industries served by NB Sebastian." },
+  { "path": "/merchandise", "title": "General Merchandise - NBSCCL", "description": "General merchandise supply and distribution by NB Sebastian." },
+  { "path": "/contact", "title": "Contact Us - NBSCCL", "description": "Contact NB Sebastian — Behind Inkoom Hospital, Spintex Road, Accra. Phone +233 200252498." },
+  { "path": "/privacy", "title": "Privacy Policy - NBSCCL", "description": "How NB Sebastian collects, uses and protects your personal data." },
+  { "path": "/terms", "title": "Terms of Service - NBSCCL", "description": "Terms governing use of the NB Sebastian website." }
+]

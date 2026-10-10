@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Building2, Mail, Phone, MapPin, Linkedin, Twitter } from 'lucide-react';
+import { Building2, Mail, Phone, MapPin } from 'lucide-react';
 
 export function Footer() {
   return (
@@ -15,10 +15,6 @@ export function Footer() {
             <p className="text-gray-300 text-sm">
               NB Sebastian Commodities Company Ltd. - Leading the way in construction, commodities, manufacturing, and international trade with over two decades of excellence.
             </p>
-            <div className="flex space-x-4">
-              <Linkedin className="h-5 w-5 text-gray-400 hover:text-white cursor-pointer transition-colors" />
-              <Twitter className="h-5 w-5 text-gray-400 hover:text-white cursor-pointer transition-colors" />
-            </div>
           </div>
 
           {/* Services */}
@@ -40,8 +36,6 @@ export function Footer() {
             <ul className="space-y-2 text-sm">
               <li><Link to="/about" className="text-gray-300 hover:text-white transition-colors">About Us</Link></li>
               <li><Link to="/contact" className="text-gray-300 hover:text-white transition-colors">Contact</Link></li>
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Careers</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">News</a></li>
             </ul>
           </div>
 
@@ -50,28 +44,28 @@ export function Footer() {
             <h3 className="font-semibold">Contact Info</h3>
             <div className="space-y-3 text-sm">
               <div className="flex items-center space-x-2">
-                <MapPin className="h-4 w-4 text-gray-400" />
+                <MapPin className="h-4 w-4 text-gray-400 shrink-0" />
                 <span className="text-gray-300">Behind Inkoom Hospital, Spintex Road (G6-166-0779)</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Phone className="h-4 w-4 text-gray-400" />
-                <span className="text-gray-300">+233 200252498</span>
+                <a href="tel:+233200252498" className="text-gray-300 hover:text-white">+233 200252498</a>
               </div>
               <div className="flex items-center space-x-2">
                 <Phone className="h-4 w-4 text-gray-400" />
-                <span className="text-gray-300">+233 550974525</span>
+                <a href="tel:+233550974525" className="text-gray-300 hover:text-white">+233 550974525</a>
               </div>
               <div className="flex items-center space-x-2">
                 <Mail className="h-4 w-4 text-gray-400" />
-                <span className="text-gray-300">info@nbsebastian.com</span>
+                <a href="mailto:info@nbsebastian.com" className="text-gray-300 hover:text-white">info@nbsebastian.com</a>
               </div>
               <div className="flex items-center space-x-2">
                 <Mail className="h-4 w-4 text-gray-400" />
-                <span className="text-gray-300">sales@nbsebastian.com</span>
+                <a href="mailto:sales@nbsebastian.com" className="text-gray-300 hover:text-white">sales@nbsebastian.com</a>
               </div>
               <div className="flex items-center space-x-2">
                 <Mail className="h-4 w-4 text-gray-400" />
-                <span className="text-gray-300">nbsebastianccl@gmail.com</span>
+                <a href="mailto:nbsebastianccl@gmail.com" className="text-gray-300 hover:text-white">nbsebastianccl@gmail.com</a>
               </div>
             </div>
           </div>
@@ -80,12 +74,12 @@ export function Footer() {
         <div className="border-t border-gray-800 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm">
-              © 2025 NB Sebastian Commodities Company Ltd. All rights reserved.
+              © {new Date().getFullYear()} NB Sebastian Commodities Company Ltd. All rights reserved.
             </p>
-            <div className="flex space-x-6 mt-4 md:mt-0">
+            <nav aria-label="Legal" className="flex space-x-6 mt-4 md:mt-0">
               <Link to="/privacy" className="text-gray-400 hover:text-white text-sm transition-colors">Privacy Policy</Link>
               <Link to="/terms" className="text-gray-400 hover:text-white text-sm transition-colors">Terms of Service</Link>
-            </div>
+            </nav>
           </div>
         </div>
       </div>
