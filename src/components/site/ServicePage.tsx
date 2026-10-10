@@ -50,7 +50,7 @@ export function ServicePage(p: ServicePageProps) {
             <SectionHeading title={p.groups.heading} intro={p.groups.intro} />
             <div className="mt-14 grid gap-x-10 gap-y-14 md:grid-cols-3">
               {p.groups.items.map((g) => (
-                <div key={g.title} className="border-t-[3px] border-plum pt-6">
+                <div key={g.title} className="border-t-[3px] border-brand pt-6">
                   <h3 className="font-heading text-2xl">{g.title}</h3>
                   <p className="mt-3 text-slate">{g.description}</p>
                   <ul className="mt-6 divide-y divide-line border-y border-line">
@@ -72,7 +72,7 @@ export function ServicePage(p: ServicePageProps) {
             <div className="mt-14 grid gap-10 md:grid-cols-3">
               {p.showcase.items.map((s) => (
                 <figure key={s.title} className="group">
-                  <div className="aspect-[4/5] overflow-hidden bg-plum">
+                  <div className="aspect-[4/5] overflow-hidden bg-brand">
                     <ImageWithFallback
                       src={s.image}
                       alt=""
@@ -105,7 +105,7 @@ export function ServicePage(p: ServicePageProps) {
         </section>
       )}
 
-      <section className="bg-plum py-20 sm:py-24 text-white">
+      <section className="bg-brand py-20 sm:py-24 text-white">
         <Container>
           <SectionHeading title={p.assurances.heading} light />
           <div className={`mt-12 grid gap-10 sm:grid-cols-2 ${p.assurances.items.length > 2 ? 'lg:grid-cols-3' : ''}`}>
@@ -126,11 +126,11 @@ export function ServicePage(p: ServicePageProps) {
           <ul className="mt-10 grid gap-px overflow-hidden border border-line bg-line sm:grid-cols-2 lg:grid-cols-5">
             {SERVICES.filter((s) => s.slug !== p.slug).map((s) => (
               <li key={s.slug} className="bg-paper">
-                <Link to={s.href} className="group flex h-full flex-col justify-between gap-8 p-6 transition-colors duration-300 hover:bg-plum hover:text-white">
+                <Link to={s.href} className="group flex h-full flex-col justify-between gap-8 p-6 transition-colors duration-300 hover:bg-brand hover:text-white">
                   <span className="font-heading text-xl">{s.name}</span>
                   <span className="flex items-end justify-between gap-4 text-sm text-slate group-hover:text-white/75">
                     {s.summary}
-                    <ArrowUpRight className="h-5 w-5 shrink-0 text-plum transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-gold" />
+                    <ArrowUpRight className="h-5 w-5 shrink-0 text-brand transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-gold" />
                   </span>
                 </Link>
               </li>

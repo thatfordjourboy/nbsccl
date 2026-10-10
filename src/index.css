@@ -2,21 +2,22 @@
 @import "tailwindcss";
 
 /*
- * NB Sebastian design tokens, taken from the client's logo (public/logo.png):
- * plum #7D0147 and gold #FDD100. Gold is only used on plum surfaces (it fails contrast on paper);
- * on light surfaces plum carries the accent. One typeface for the site (Archivo, variable width),
- * contrasting with the logo's classical serif capitals.
+ * NB Sebastian design tokens. Brand surfaces are deep forest green with a soft gold accent
+ * (chosen by the client over the logo's plum, 2026-10-10; see PROJECT.md). The logo (public/logo.png,
+ * gold + white on transparent) needs a dark brand surface behind it. Gold is only used on brand
+ * surfaces (it fails contrast on paper); on light surfaces the brand green carries the accent.
+ * One typeface (Archivo, variable width), contrasting with the logo's classical serif capitals.
  */
 @theme {
-  --color-plum: #7d0147;
-  --color-plum-deep: #4f022d;
-  --color-plum-soft: #94155c;
-  --color-gold: #fdd100;
-  --color-gold-soft: #ffe36b;
-  --color-paper: #f7f4f5;
-  --color-ink: #24121c;
-  --color-slate: #6b5a63;
-  --color-line: #e4dbe0;
+  --color-brand: #1e3a32;
+  --color-brand-deep: #142822;
+  --color-brand-soft: #2b4d43;
+  --color-gold: #ddb84f;
+  --color-gold-soft: #e9cb7a;
+  --color-paper: #f4f4f0;
+  --color-ink: #18201d;
+  --color-slate: #5a645f;
+  --color-line: #dde1dc;
 
   --font-sans: "Archivo Variable", ui-sans-serif, system-ui, sans-serif;
 
@@ -31,16 +32,16 @@
   --card-foreground: var(--color-ink);
   --popover: #ffffff;
   --popover-foreground: var(--color-ink);
-  --primary: var(--color-plum);
+  --primary: var(--color-brand);
   --primary-foreground: #ffffff;
-  --accent: #efe7eb;
+  --accent: #e6ebe7;
   --accent-foreground: var(--color-ink);
   --muted-foreground: var(--color-slate);
   --destructive: #b42318;
   --border: var(--color-line);
   --input: var(--color-line);
   --input-background: #ffffff;
-  --ring: var(--color-plum);
+  --ring: var(--color-brand);
   --radius: 0.25rem;
 }
 
@@ -104,7 +105,7 @@
 
   ::selection {
     background: var(--color-gold);
-    color: var(--color-plum-deep);
+    color: var(--color-brand-deep);
   }
 }
 

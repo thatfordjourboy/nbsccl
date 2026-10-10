@@ -21,7 +21,7 @@ export function Header() {
   }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-50 bg-plum text-white">
+    <header className="sticky top-0 z-50 bg-brand text-white">
       <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-5 sm:px-8">
         <Logo />
 
@@ -59,7 +59,7 @@ export function Header() {
                   transition={{ duration: 0.18 }}
                   className="absolute right-0 top-full w-[34rem] pt-4"
                 >
-                  <ul className="grid grid-cols-2 gap-px overflow-hidden rounded-sm bg-line shadow-2xl shadow-plum-deep/30">
+                  <ul className="grid grid-cols-2 gap-px overflow-hidden rounded-sm bg-line shadow-2xl shadow-brand-deep/30">
                     {SERVICES.map((s) => (
                       <li key={s.href} className="bg-white">
                         <NavLink
@@ -78,7 +78,7 @@ export function Header() {
               )}
             </AnimatePresence>
           </div>
-          <NavLink to="/contact" className="rounded-sm bg-gold px-5 py-2.5 font-semibold text-plum-deep transition-colors hover:bg-gold-soft">
+          <NavLink to="/contact" className="rounded-sm bg-gold px-5 py-2.5 font-semibold text-brand-deep transition-colors hover:bg-gold-soft">
             Contact us
           </NavLink>
         </nav>
@@ -119,7 +119,7 @@ export function Header() {
               </ul>
               <NavLink
                 to="/contact"
-                className="mt-6 flex h-12 items-center justify-center rounded-sm bg-gold font-semibold text-plum-deep"
+                className="mt-6 flex h-12 items-center justify-center rounded-sm bg-gold font-semibold text-brand-deep"
               >
                 Contact us
               </NavLink>

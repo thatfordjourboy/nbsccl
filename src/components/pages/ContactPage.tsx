@@ -94,7 +94,7 @@ export function ContactPage() {
                 name="service"
                 key={presetService}
                 defaultValue={presetService}
-                className="flex h-11 w-full rounded-md border border-input bg-input-background px-3 text-base outline-none focus-visible:border-plum md:text-sm"
+                className="flex h-11 w-full rounded-md border border-input bg-input-background px-3 text-base outline-none focus-visible:border-brand md:text-sm"
               >
                 <option value="">Choose a service</option>
                 {SERVICES.map((s) => (
@@ -126,12 +126,12 @@ export function ContactPage() {
           <dl className="space-y-10 lg:col-span-5 lg:pt-4">
             <Detail title="Call">
               {CONTACT.phones.map((p) => (
-                <a key={p} href={tel(p)} className="block text-lg hover:text-plum">{p}</a>
+                <a key={p} href={tel(p)} className="block text-lg hover:text-brand">{p}</a>
               ))}
             </Detail>
             <Detail title="Email">
               {CONTACT.emails.map((e) => (
-                <a key={e} href={`mailto:${e}`} className="block break-all text-lg hover:text-plum">{e}</a>
+                <a key={e} href={`mailto:${e}`} className="block break-all text-lg hover:text-brand">{e}</a>
               ))}
             </Detail>
             <Detail title="Visit">
@@ -146,7 +146,7 @@ export function ContactPage() {
         </Container>
       </section>
 
-      <section aria-label="Map" className="h-[420px] border-t border-line bg-plum-deep sm:h-[480px]">
+      <section aria-label="Map" className="h-[420px] border-t border-line bg-brand-deep sm:h-[480px]">
         <iframe
           title="Map showing NB Sebastian's office near Inkoom Hospital, Spintex Road, Accra"
           src="https://www.google.com/maps?q=Inkoom+Hospital,+Spintex+Road,+Accra,+Ghana&output=embed"

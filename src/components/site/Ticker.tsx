@@ -10,13 +10,13 @@ export function Ticker() {
       {GOODS.map((g) => (
         <li key={g} className="flex items-center gap-10 whitespace-nowrap">
           <span className="font-heading text-lg sm:text-xl">{g}</span>
-          <span className="h-2 w-2 rotate-45 bg-plum" aria-hidden="true" />
+          <span className="h-2 w-2 rotate-45 bg-brand" aria-hidden="true" />
         </li>
       ))}
     </ul>
   );
   return (
-    <section aria-label="Goods we trade" className="group overflow-hidden border-b border-plum-deep/20 bg-gold py-5 text-plum-deep">
+    <section aria-label="Goods we trade" className="group overflow-hidden border-b border-brand-deep/20 bg-gold py-5 text-brand-deep">
       <div className="flex w-max animate-[ticker_45s_linear_infinite] group-hover:[animation-play-state:paused] motion-reduce:animate-none">
         {row(false)}
         {row(true)}

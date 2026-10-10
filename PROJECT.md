@@ -35,7 +35,8 @@ Draft. Code is pre-launch ready; launch is blocked on the **client** and **deplo
 - Unused theme tokens for dark mode remain in `src/index.css` (harmless).
 
 ## Decisions
-- **2026-10-10**: Visual identity follows the client logo: plum #7D0147 + gold #FDD100. Site type is Archivo (variable width), contrasting with the logo's classical serif caps.
+- **2026-10-10**: Palette changed from the logo's plum to **forest green #1E3A32 + soft gold #DDB84F** after internal disagreement at the client over the plum. Options compared: aubergine, navy, forest, espresso. Tokens renamed `plum*` → `brand*` so the next change is one edit in `src/index.css`. The logo itself is unchanged (gold + white), and sits on the green.
+- **2026-10-10** (superseded by the forest palette above): Visual identity followed the client logo: plum #7D0147 + gold #FDD100. Site type is Archivo (variable width), contrasting with the logo's classical serif caps.
 - **2026-10-10**: Home hero concept "Trading from the centre of the map": the Prime Meridian runs through Tema and meets the Equator in the Gulf of Guinea. Animated graticule + trade routes radiating from Accra (`HeroMap.tsx`). Routes go to major global hubs and are deliberately unlabelled, so they don't imply specific client relationships.
 - **2026-10-10**: Tailwind compiled at build time (`@tailwindcss/vite`) instead of a frozen precompiled CSS file, because new classes were silently missing (e.g. map height).
 - **2026-10-10**: Contact form uses native HTML validation + server validation; dropped zod / react-hook-form / Radix Select (bundle 167 kB → 10 kB).
@@ -43,6 +44,9 @@ Draft. Code is pre-launch ready; launch is blocked on the **client** and **deplo
 - **2026-10-10**: Page titles use the `"<Page> - NBSCCL"` format (kept from commit 8b0a5a4).
 
 ## Changelog
+
+### 2026-10-10: Milder palette
+- Switched brand colours to forest green + soft gold (client request). Tokens renamed to `brand`, `brand-deep`, `brand-soft`; paper, ink, slate and line retuned to neutral greens. Favicon, touch icon and share image regenerated on the new green; `theme-color` updated.
 
 ### 2026-10-10: Copy rewrite
 - Rewrote site copy in one voice: short, concrete, sentence case, written for buyers, shippers and gold sellers. Home hero is now "Buildings, commodities, gold and freight. One Accra company, from first enquiry to final delivery."

@@ -4,7 +4,7 @@ import { CONTACT, SERVICES, tel } from '../services';
 
 export function Footer() {
   return (
-    <footer className="bg-plum-deep text-white/75">
+    <footer className="bg-brand-deep text-white/75">
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           <div>

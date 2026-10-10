@@ -31,10 +31,10 @@ export function HomePage() {
   return (
     <>
       {/* Hero: the Equator and Prime Meridian meet just south of Accra */}
-      <section className="relative isolate flex min-h-[calc(100svh-72px)] flex-col overflow-hidden bg-plum text-white">
+      <section className="relative isolate flex min-h-[calc(100svh-72px)] flex-col overflow-hidden bg-brand text-white">
         <HeroMap />
         <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-plum via-plum/75 to-plum/10 lg:bg-gradient-to-r lg:from-plum lg:via-plum/60 lg:to-transparent"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-brand via-brand/75 to-brand/10 lg:bg-gradient-to-r lg:from-brand lg:via-brand/60 lg:to-transparent"
           aria-hidden="true"
         />
         <Container className="relative flex flex-1 flex-col justify-center py-20">
@@ -100,7 +100,7 @@ export function HomePage() {
                   to={s.href}
                   className="group relative grid items-center gap-x-10 gap-y-2 py-7 sm:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)_auto] sm:py-9"
                 >
-                  <span className="font-display text-[1.9rem] leading-none transition-colors duration-300 group-hover:text-plum sm:text-5xl">
+                  <span className="font-display text-[1.9rem] leading-none transition-colors duration-300 group-hover:text-brand sm:text-5xl">
                     {s.name}
                   </span>
                   <span className="max-w-sm text-slate">{s.summary}</span>
@@ -108,7 +108,7 @@ export function HomePage() {
                     <span className="relative h-20 w-32 overflow-hidden transition-[clip-path] duration-500 ease-out [clip-path:inset(0_0_0_100%)] group-hover:[clip-path:inset(0)] group-focus-visible:[clip-path:inset(0)]">
                       <ImageWithFallback src={s.image} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
                     </span>
-                    <span className="flex h-12 w-12 items-center justify-center rounded-full border border-ink/20 transition-colors duration-300 group-hover:border-plum group-hover:bg-plum group-hover:text-white">
+                    <span className="flex h-12 w-12 items-center justify-center rounded-full border border-ink/20 transition-colors duration-300 group-hover:border-brand group-hover:bg-brand group-hover:text-white">
                       <ArrowUpRight className="h-5 w-5" />
                     </span>
                   </span>
@@ -120,7 +120,7 @@ export function HomePage() {
       </section>
 
       {/* Gold spotlight */}
-      <section className="bg-plum-deep text-white">
+      <section className="bg-brand-deep text-white">
         <div className="grid lg:grid-cols-2">
           <div className="relative min-h-80 lg:min-h-[36rem]">
             <ImageWithFallback
@@ -181,7 +181,7 @@ export function HomePage() {
               {FIGURES.map((f) => (
                 <div key={f.label}>
                   <dt className="sr-only">{f.label}</dt>
-                  <dd className="font-display text-3xl text-plum sm:text-4xl">{f.value}</dd>
+                  <dd className="font-display text-3xl text-brand sm:text-4xl">{f.value}</dd>
                   <dd className="mt-2 text-sm text-slate">{f.label}</dd>
                 </div>
               ))}
@@ -190,7 +190,7 @@ export function HomePage() {
               <Link to="/about">Read our story</Link>
             </Button>
           </div>
-          <div className="aspect-[4/3] overflow-hidden bg-plum">
+          <div className="aspect-[4/3] overflow-hidden bg-brand">
             <ImageWithFallback
               src={unsplash('1497366216548-37526070297c', 1200)}
               alt="An open-plan office"
@@ -207,7 +207,7 @@ export function HomePage() {
           <SectionHeading title="What we stand for" />
           <dl className="mt-12 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
             {VALUES.map((v) => (
-              <div key={v.title} className="border-l-[3px] border-plum pl-5">
+              <div key={v.title} className="border-l-[3px] border-brand pl-5">
                 <dt className="font-heading text-xl">{v.title}</dt>
                 <dd className="mt-2 text-slate">{v.description}</dd>
               </div>

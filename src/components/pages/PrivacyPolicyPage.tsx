@@ -65,7 +65,7 @@ export function PrivacyPolicyPage() {
               <li>Object to or restrict processing; withdraw consent where applicable.</li>
               <li>Portability of data where required by law.</li>
             </ul>
-            <p className="text-slate mt-3">Contact us to exercise rights: <a className="text-plum underline underline-offset-4" href="mailto:privacy@nbsebastian.com">privacy@nbsebastian.com</a>.</p>
+            <p className="text-slate mt-3">Contact us to exercise rights: <a className="text-brand underline underline-offset-4" href="mailto:privacy@nbsebastian.com">privacy@nbsebastian.com</a>.</p>
           </div>
 
           <div>
@@ -86,7 +86,7 @@ export function PrivacyPolicyPage() {
           <div className="text-sm text-slate">Last updated: 10 October 2026</div>
 
           <div className="pt-4">
-            <Link to="/" className="text-plum underline underline-offset-4">Back to Home</Link>
+            <Link to="/" className="text-brand underline underline-offset-4">Back to Home</Link>
           </div>
         </div>
       </section>

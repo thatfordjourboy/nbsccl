@@ -11,7 +11,7 @@ export function Container({ children, className = '' }: { children: ReactNode; c
   return <div className={`mx-auto w-full max-w-7xl px-5 sm:px-8 ${className}`}>{children}</div>;
 }
 
-/** Inner-page hero: title on plum, photo panel that opens from the right edge on load. */
+/** Inner-page hero: title on brand, photo panel that opens from the right edge on load. */
 export function PageHero({
   title,
   intro,
@@ -27,7 +27,7 @@ export function PageHero({
 }) {
   const still = useReducedMotion() ?? false;
   return (
-    <section className="relative overflow-hidden bg-plum text-white">
+    <section className="relative overflow-hidden bg-brand text-white">
       <div className={image ? 'grid lg:grid-cols-[1.15fr_1fr]' : ''}>
         <Container className={image ? 'lg:mr-0 lg:max-w-none lg:pl-[max(2rem,calc((100vw-80rem)/2+2rem))]' : ''}>
           <div className="py-16 sm:py-24 lg:py-32 max-w-2xl">
@@ -68,7 +68,7 @@ export function PageHero({
             className="relative h-64 sm:h-80 lg:h-auto"
           >
             <ImageWithFallback src={image} alt={imageAlt} className="absolute inset-0 h-full w-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-r from-plum/40 to-transparent lg:from-plum/60" />
+            <div className="absolute inset-0 bg-gradient-to-r from-brand/40 to-transparent lg:from-brand/60" />
           </motion.div>
         )}
       </div>
@@ -125,7 +125,7 @@ export function ContactBand({
   service?: string;
 }) {
   return (
-    <section className="bg-plum-deep text-white">
+    <section className="bg-brand-deep text-white">
       <Container className="grid gap-12 py-20 sm:py-24 lg:grid-cols-[1.2fr_1fr] lg:items-end">
         <div>
           <h2 className="font-display text-4xl sm:text-5xl text-balance">{heading}</h2>

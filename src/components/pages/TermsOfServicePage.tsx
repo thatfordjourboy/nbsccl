@@ -54,13 +54,13 @@ export function TermsOfServicePage() {
 
           <div>
             <h2 className="font-heading text-2xl text-ink">9. Contact</h2>
-            <p className="text-slate mt-3">Questions about these Terms? Contact us at <a className="text-plum underline underline-offset-4" href="mailto:legal@nbsebastian.com">legal@nbsebastian.com</a>.</p>
+            <p className="text-slate mt-3">Questions about these Terms? Contact us at <a className="text-brand underline underline-offset-4" href="mailto:legal@nbsebastian.com">legal@nbsebastian.com</a>.</p>
           </div>
 
           <div className="text-sm text-slate">Last updated: 10 October 2026</div>
 
           <div className="pt-4">
-            <Link to="/" className="text-plum underline underline-offset-4">Back to Home</Link>
+            <Link to="/" className="text-brand underline underline-offset-4">Back to Home</Link>
           </div>
         </div>
       </section>

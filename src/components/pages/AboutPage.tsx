@@ -38,7 +38,7 @@ export function AboutPage() {
               {FIGURES.map((f) => (
                 <div key={f.label}>
                   <dt className="sr-only">{f.label}</dt>
-                  <dd className="font-display text-3xl text-plum sm:text-5xl">{f.value}</dd>
+                  <dd className="font-display text-3xl text-brand sm:text-5xl">{f.value}</dd>
                   <dd className="mt-2 text-sm text-slate">{f.label}</dd>
                 </div>
               ))}
@@ -57,7 +57,7 @@ export function AboutPage() {
             <p>
               Today we operate in more than 50 countries and have completed over 1,000 projects. The standard has not changed.
             </p>
-            <div className="!mt-12 aspect-[16/9] overflow-hidden bg-plum">
+            <div className="!mt-12 aspect-[16/9] overflow-hidden bg-brand">
               <ImageWithFallback
                 src={unsplash('1486406146926-c627a92ad1ab', 1400)}
                 alt="Office towers seen from below"
@@ -69,7 +69,7 @@ export function AboutPage() {
         </Container>
       </section>
 
-      <section className="bg-plum py-20 text-white sm:py-28">
+      <section className="bg-brand py-20 text-white sm:py-28">
         <Container>
           <SectionHeading title="Our values" intro="What clients, suppliers and partners can expect from us." light />
           <dl className="mt-14 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">

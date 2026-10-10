@@ -30,7 +30,7 @@ npm run preview    # serve build/
 | `src/components/site/` | Design-system building blocks: `PageHero`, `SectionHeading`, `Steps`, `ContactBand`, `Container`, `ServicePage` template, `HeroMap`, `Ticker`, `Logo`. |
 | `src/components/ui/` | Kept shadcn components (button, input, label, textarea, sonner). Delete what you stop using. |
 | `src/index.css` | Tailwind source: brand tokens, font, `font-display` / `font-heading` utilities. Compiled at build time. |
-| `public/logo.png`, `logo-mark.png` | Client logo, keyed out of its plum background. Only place it on plum surfaces. |
+| `public/logo.png`, `logo-mark.png` | Client logo (gold + white on transparent). Only place it on dark `brand` surfaces. Favicon, touch icon and `og-image.png` are generated from it on the brand green. |
 | `api/contact.ts` | Vercel function: validation, honeypot, rate limit, Turnstile, sends mail via Resend. |
 | `scripts/prerender.mjs` | Post-build: per-route HTML with correct head tags, `404.html`, `sitemap.xml`. |
 | `vercel.json` | Security headers (CSP, HSTS, ...) and caching. |
@@ -52,7 +52,7 @@ The sitemap and prerendered HTML update automatically.
 - Run `npm audit` when touching dependencies; ship with 0 high/critical.
 
 ### Design system (do not drift)
-- **Colours come from the client logo**: `plum` #7D0147 (brand surfaces, header, heroes), `plum-deep` (footer, contact band, gold spotlight), `gold` #FDD100 (accent **on plum only**; it fails contrast on light backgrounds), `paper` (page background), `ink` (text), `slate` (secondary text), `line` (rules). Use the tokens, never raw hex or Tailwind palette colours like `blue-600`.
+- **Colours** (client choice, 2026-10-10): `brand` #1E3A32 forest green (header, heroes), `brand-deep` #142822 (footer, contact band, gold spotlight), `brand-soft` (hover), `gold` #DDB84F (accent **on brand surfaces only**; it fails contrast on light backgrounds), `paper` (page background), `ink` (text), `slate` (secondary text), `line` (rules). Use the tokens, never raw hex or Tailwind palette colours like `blue-600`. The logo needs a dark `brand` surface behind it.
 - **Type**: Archivo variable only. `font-display` (expanded, heavy) for hero and page titles and big service names; `font-heading` for section and item headings; normal Archivo for body. Sentence case everywhere; no all-caps labels.
 - **Layout**: left-aligned; `Container` for width; sections are `py-20 sm:py-28`. Lists separated by hairline rules, not rows of identical icon cards. Don't add icon tiles.
 - **New service page** = data passed to `ServicePage` (see `GoldPage.tsx`). Add the service to `src/services.ts` and `src/routes.json` too.
