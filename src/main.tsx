@@ -4,6 +4,25 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App.tsx';
 import './index.css';
 
+// After a new deploy, an open tab may request page chunks that no longer exist. Reload once into the new build.
+window.addEventListener('vite:preloadError', (event) => {
+  try {
+    if (sessionStorage.getItem('chunk-reload')) return;
+    sessionStorage.setItem('chunk-reload', '1');
+  } catch {
+    /* storage blocked: still reload once per page load */
+  }
+  event.preventDefault();
+  window.location.reload();
+});
+window.addEventListener('load', () => {
+  try {
+    sessionStorage.removeItem('chunk-reload');
+  } catch {
+    /* ignore */
+  }
+});
+
 const container = document.getElementById('root')!;
 const app = (
   <StrictMode>
