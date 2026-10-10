@@ -67,7 +67,15 @@ export function PageHero({
             transition={{ duration: 1.3, delay: 0.15, ease: EASE }}
             className="relative h-64 sm:h-80 lg:h-auto"
           >
-            <ImageWithFallback src={image} alt={imageAlt} className="absolute inset-0 h-full w-full object-cover" />
+            {/* Largest paint on inner pages: responsive sizes, fetched first. */}
+            <ImageWithFallback
+              src={image}
+              srcSet={[640, 960, 1280, 1600].map((w) => `${image.replace(/([?&])w=\d+/, `$1w=${w}`)} ${w}w`).join(', ')}
+              sizes="(min-width: 1024px) 47vw, 100vw"
+              alt={imageAlt}
+              {...{ fetchpriority: 'high' }}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
             <div className="absolute inset-0 bg-gradient-to-r from-brand/40 to-transparent lg:from-brand/60" />
           </motion.div>
         )}

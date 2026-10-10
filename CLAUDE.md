@@ -24,7 +24,7 @@ npm run preview    # serve build/
 | Path | What |
 |---|---|
 | `src/routes.json` | **Single source of truth for routes**: path, `<title>`, meta description. Used by `Seo.tsx`, `scripts/prerender.mjs` and the sitemap. |
-| `src/App.tsx` | Router. Pages are lazy-loaded. |
+| `src/App.tsx` | Routes (router-agnostic). Pages are lazy-loaded. `main.tsx` wraps it in `BrowserRouter` and hydrates; `entry-server.tsx` wraps it in `StaticRouter` for build-time rendering. |
 | `src/components/pages/` | One file per page. |
 | `src/services.ts` | The six business lines (name, link, summary, image), contact details and company figures. Header, footer, home page and contact form all read from here. |
 | `src/components/site/` | Design-system building blocks: `PageHero`, `SectionHeading`, `Steps`, `ContactBand`, `Container`, `ServicePage` template, `HeroMap`, `Ticker`, `Logo`. |
@@ -32,7 +32,8 @@ npm run preview    # serve build/
 | `src/index.css` | Tailwind source: brand tokens, font, `font-display` / `font-heading` utilities. Compiled at build time. |
 | `public/logo.png`, `logo-mark.png` | Client logo (gold + white on transparent). Only place it on dark `brand` surfaces. Favicon, touch icon and `og-image.png` are generated from it on the brand green. |
 | `api/contact.ts` | Vercel function: validation, honeypot, rate limit, Turnstile, sends mail via Resend. |
-| `scripts/prerender.mjs` | Post-build: per-route HTML with correct head tags, `404.html`, `sitemap.xml`. |
+| `scripts/prerender.mjs` | Post-build static generation: full server-rendered HTML per route, head/OG tags, breadcrumb JSON-LD, `404.html`, `sitemap.xml`, `robots.txt`. |
+| `scripts/site-url.mjs` | The public site URL (`VITE_SITE_URL` > Vercel production domain > `nbsccl.vercel.app`) and per-route share image. |
 | `vercel.json` | Security headers (CSP, HSTS, ...) and caching. |
 
 ## Rules
@@ -58,6 +59,12 @@ The sitemap and prerendered HTML update automatically.
 - **New service page** = data passed to `ServicePage` (see `GoldPage.tsx`). Add the service to `src/services.ts` and `src/routes.json` too.
 - **Motion budget**: the home hero sequence (`HeroMap` + headline), the photo opening in `PageHero`, the `Ticker`, scroll-drawn `Steps` lines (only for real sequences), and hover responses. Don't add fade-up-on-scroll to sections. Everything must respect reduced motion (`MotionConfig reducedMotion="user"`, `useReducedMotion`, `motion-reduce:`).
 - **Copy**: plain, specific, sentence case. Buttons say what happens ("Request a gold quote"), not "Learn more". Don't invent facts about the company: only use what the client has provided (see PROJECT.md open items).
+
+### SEO and rendering (do not regress)
+- Every page is server-rendered at build time and hydrated in the browser. **Components must be SSR-safe**: never touch `window`, `document`, `localStorage` or `matchMedia` during render or in `useState` initialisers; do it in `useEffect`. Server and first client render must produce the same markup (a mismatch shows up as a console error; `csp-check` style tests catch it).
+- Per-page title, description, share image (`image` = Unsplash photo id, cropped 1200x630) and breadcrumb label live in `src/routes.json`. Titles under 60 characters, descriptions under 160.
+- Never hardcode the site domain. `index.html` uses the `__SITE_URL__` placeholder; code uses `import.meta.env.VITE_SITE_URL`.
+- One `<h1>` per page.
 
 ### Code style
 - Use Tailwind classes; they are compiled at build time, so any class works. Don't hand-edit compiled CSS.

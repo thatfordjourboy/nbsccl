@@ -3,10 +3,12 @@ import { motion, useReducedMotion } from 'motion/react';
 
 function useWide() {
   const query = '(min-width: 1024px)';
-  const [wide, setWide] = useState(() => window.matchMedia(query).matches);
+  // Start narrow so server and first client render match; the map is invisible (animating in) for that frame.
+  const [wide, setWide] = useState(false);
   useEffect(() => {
     const mq = window.matchMedia(query);
     const onChange = () => setWide(mq.matches);
+    onChange();
     mq.addEventListener('change', onChange);
     return () => mq.removeEventListener('change', onChange);
   }, []);

@@ -28,10 +28,9 @@ Draft. Code is pre-launch ready; launch is blocked on the **client** and **deplo
 - [ ] After the first deploy: check the headers on securityheaders.com, test the form end to end, confirm `/random-path` returns 404, then submit `sitemap.xml` in Google Search Console.
 - [ ] HSTS is set with `preload`. Only submit to hstspreload.org once every subdomain serves HTTPS.
 
-- [ ] **Canonical domain**: the site is live at `nbsccl.vercel.app`, but canonical URLs, sitemap and share tags point at `https://www.nbsccl.com` (the default). Either connect `www.nbsccl.com` in Vercel, or set `VITE_SITE_URL=https://nbsccl.vercel.app` in Vercel env vars until the domain is ready.
+- [ ] **Custom domain**: when `www.nbsccl.com` is bought, add it in Vercel → Domains (and redirect the apex to `www`). Canonicals, share images, sitemap and robots.txt switch automatically on the next deploy (`VERCEL_PROJECT_PRODUCTION_URL`). Then submit the sitemap in Google Search Console.
 
 ### Known limitations (deliberate)
-- **Head-only prerender**: crawlers get correct titles/meta per route, but body text is client-rendered. Google renders JS, so this is fine for now. Move to full SSG (e.g. `vite-react-ssg`) if rankings need it.
 - **Contact rate limit is in-memory per function instance** (5 requests / 10 min / IP). Move to Vercel KV / Upstash if spam gets through Turnstile + honeypot.
 - `style-src 'unsafe-inline'` remains in the CSP; sonner and motion inject inline styles.
 - Unused theme tokens for dark mode remain in `src/index.css` (harmless).
@@ -46,6 +45,16 @@ Draft. Code is pre-launch ready; launch is blocked on the **client** and **deplo
 - **2026-10-10**: Page titles use the `"<Page> - NBSCCL"` format (kept from commit 8b0a5a4).
 
 ## Changelog
+
+### 2026-10-10: Technical SEO
+- **Fixed broken link previews and canonicals**: every `og:image`, canonical, `og:url`, sitemap entry and robots.txt pointed at `www.nbsccl.com`, which does not resolve. The site URL now comes from one place (`scripts/site-url.mjs`): `nbsccl.vercel.app` today, the custom domain automatically once connected.
+- **Full static rendering**: every route is server-rendered at build time (`src/entry-server.tsx` + `scripts/prerender.mjs`) and hydrated in the browser, so crawlers and link-preview bots get the full page text, not an empty `<div>`. Verified: no hydration errors, animations and client-side navigation unchanged.
+- Per-page share images (service photo cropped to 1200x630) with alt text; `og:locale`, `twitter:image:alt`; sharper, keyword-bearing titles (home was "Home - NBSCCL").
+- Structured data: Organization + LocalBusiness (address, phones, opening hours), WebSite, and BreadcrumbList per page.
+- robots.txt generated (blocks `/api/`); duplicate URLs removed (`cleanUrls`, no trailing slash: `/about/` and `/about/index.html` redirect to `/about`).
+- Home `<h1>` lines now have real spaces ("Trading fromthe centre" before).
+- Favicon resized to 96px (Google needs a multiple of 48px).
+- Inner-page hero photo (LCP) gets responsive `srcset` and `fetchpriority="high"`.
 
 ### 2026-10-10: Security hardening, logo tint, hero polish
 **Security** (`api/contact.ts`, `vercel.json`, `ContactPage.tsx`; covered by `tests/contact.test.ts`, 9 tests)

@@ -49,6 +49,7 @@ export function HomePage() {
                 >
                   {line}
                 </motion.span>
+                {i < HEADLINE.length - 1 && ' '}
               </span>
             ))}
           </h1>

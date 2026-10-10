@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { MotionConfig } from 'motion/react';
 import { Suspense, lazy } from 'react';
 import { Header } from './components/Header';
@@ -21,10 +21,10 @@ const PrivacyPolicyPage = lazy(() => import('./components/pages/PrivacyPolicyPag
 const NotFoundPage = lazy(() => import('./components/pages/NotFoundPage').then(m => ({ default: m.NotFoundPage })));
 const TermsOfServicePage = lazy(() => import('./components/pages/TermsOfServicePage').then(m => ({ default: m.TermsOfServicePage })));
 
+// Router-agnostic: main.tsx wraps this in BrowserRouter, entry-server.tsx in StaticRouter.
 export default function App() {
   return (
-    <Router>
-      <MotionConfig reducedMotion="user">
+    <MotionConfig reducedMotion="user">
       <ErrorBoundary>
         <div className="min-h-screen flex flex-col">
           <Header />
@@ -52,7 +52,6 @@ export default function App() {
           <Toaster />
         </div>
       </ErrorBoundary>
-      </MotionConfig>
-    </Router>
+    </MotionConfig>
   );
 }
