@@ -180,10 +180,9 @@ export function HomePage() {
             />
             <dl className="mt-10 grid grid-cols-3 gap-6 border-t border-line pt-8">
               {FIGURES.map((f) => (
-                <div key={f.label}>
-                  <dt className="sr-only">{f.label}</dt>
+                <div key={f.label} className="flex flex-col-reverse">
+                  <dt className="mt-2 text-sm text-slate">{f.label}</dt>
                   <dd className="font-display text-3xl text-brand sm:text-4xl">{f.value}</dd>
-                  <dd className="mt-2 text-sm text-slate">{f.label}</dd>
                 </div>
               ))}
             </dl>
