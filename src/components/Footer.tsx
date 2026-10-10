@@ -10,7 +10,7 @@ export function Footer() {
           <div>
             <Logo className="h-11" />
             <p className="mt-6 max-w-xs text-sm">
-              Construction, commodities, import and export, gold purchasing, manufacturing and general merchandise, from Accra.
+              Construction, commodities, freight, gold, manufacturing and merchandise. Based in Accra, Ghana.
             </p>
           </div>
 

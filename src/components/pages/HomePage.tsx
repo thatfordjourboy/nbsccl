@@ -12,19 +12,19 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 const HEADLINE = ['Trading from', 'the centre', 'of the map.'];
 
 const PROCESS = [
-  { title: 'Tell us what you need', description: 'Call, email or send an enquiry with the goods, quantities or project you have in mind, and your timeline.' },
-  { title: 'We plan and quote', description: 'We work out sourcing, pricing and logistics, then send you a clear quote to review.' },
-  { title: 'We handle the paperwork', description: 'Contracts, customs documentation and regulatory checks are prepared and filed for you.' },
-  { title: 'Delivery and follow-up', description: 'We coordinate transport and keep you updated until the goods arrive or the work is handed over.' },
+  { title: 'Tell us what you need', description: 'Call, email or send an enquiry: the goods, quantities or project, and when you need it.' },
+  { title: 'Get a clear quote', description: 'We work out sourcing, pricing and logistics, and send you a written quote.' },
+  { title: 'We handle the paperwork', description: 'Contracts, permits and customs documents, prepared and filed for you.' },
+  { title: 'Delivery, then follow-up', description: 'We arrange transport and keep you updated until the goods arrive or the keys are handed over.' },
 ];
 
 const VALUES = [
-  { title: 'Integrity', description: 'Clear terms, honest pricing and full documentation.' },
-  { title: 'Partnership', description: 'Long relationships with clients, suppliers and communities.' },
-  { title: 'Excellence', description: 'Work checked properly and delivered to standard.' },
-  { title: 'Global reach', description: 'Local knowledge in Accra, partners across continents.' },
-  { title: 'Innovation', description: 'Better methods and tools, adopted when they help clients.' },
-  { title: 'Sustainability', description: 'Practices that hold up for the next generation.' },
+  { title: 'Integrity', description: 'Clear terms, honest prices, everything in writing.' },
+  { title: 'Partnership', description: 'We would rather keep a client for ten years than win one deal.' },
+  { title: 'Excellence', description: 'Work is checked before we call it finished.' },
+  { title: 'Global reach', description: 'Rooted in Accra, connected to markets abroad.' },
+  { title: 'Innovation', description: 'New tools when they make the work better, not for show.' },
+  { title: 'Sustainability', description: 'Decisions that will still look right in twenty years.' },
 ];
 
 export function HomePage() {
@@ -58,15 +58,14 @@ export function HomePage() {
             transition={{ duration: 1, delay: 0.9 }}
           >
             <p className="mt-8 max-w-lg text-lg text-white/80 sm:text-xl">
-              NB Sebastian Commodities Company is an Accra business working in construction, commodities trading, import and
-              export, gold purchasing, manufacturing and general merchandise.
+              Buildings, commodities, gold and freight. One Accra company, from first enquiry to final delivery.
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
               <Button asChild size="lg" variant="gold">
-                <Link to="/contact">Talk to our team</Link>
+                <Link to="/contact">Start an enquiry</Link>
               </Button>
               <Button asChild size="lg" variant="outline-light">
-                <a href="#services">See what we do</a>
+                <a href="#services">Explore our services</a>
               </Button>
             </div>
           </motion.div>
@@ -92,7 +91,7 @@ export function HomePage() {
         <Container>
           <SectionHeading
             title="Six trades, one office in Accra"
-            intro="From building sites to bullion. Choose a line of business to see what we offer and how to start."
+            intro="From building sites to bullion. Pick a service to see what is included and how to get started."
           />
           <ul className="mt-14 border-b border-line">
             {SERVICES.map((s) => (
@@ -133,12 +132,12 @@ export function HomePage() {
           </div>
           <div className="px-5 py-20 sm:px-12 lg:px-16 lg:py-28 xl:pr-[max(4rem,calc((100vw-80rem)/2+2rem))]">
             <p className="text-gold-soft">Ghana is Africa&apos;s largest gold producer.</p>
-            <h2 className="mt-4 font-display text-4xl sm:text-5xl text-balance">Gold purchasing, done in the open</h2>
+            <h2 className="mt-4 font-display text-4xl sm:text-5xl text-balance">Know exactly what your gold is worth</h2>
             <dl className="mt-12 space-y-8">
               {[
-                ['Transparent rates', 'Prices are set against the market and explained before you agree to anything.'],
-                ['Tested purity', 'Every lot is assessed and certified using established testing methods.'],
-                ['Full documentation', 'Each transaction is recorded and documented from weighing to payment.'],
+                ['Market-linked rates', 'You get the current price, and see how it was calculated, before you agree to anything.'],
+                ['Tested purity', 'Every lot is weighed, and its purity tested and certified.'],
+                ['A full paper trail', 'Every transaction is documented, from the scale to the payment.'],
               ].map(([title, text]) => (
                 <div key={title} className="border-t border-white/15 pt-5">
                   <dt className="font-heading text-xl text-gold">{title}</dt>
@@ -147,7 +146,7 @@ export function HomePage() {
               ))}
             </dl>
             <Button asChild size="lg" variant="gold" className="mt-12">
-              <Link to="/gold">About gold purchasing</Link>
+              <Link to="/gold">How selling gold works</Link>
             </Button>
           </div>
         </div>
@@ -159,8 +158,8 @@ export function HomePage() {
           <div className="lg:col-span-5">
             <div className="lg:sticky lg:top-28">
               <SectionHeading
-                title="How working with us goes"
-                intro="The same four steps whether you are buying cocoa, shipping freight or starting a building project."
+                title="Four steps from enquiry to delivery"
+                intro="The same process whether you are buying cocoa, shipping freight or breaking ground."
               />
             </div>
           </div>
@@ -175,8 +174,8 @@ export function HomePage() {
         <Container className="grid items-center gap-14 lg:grid-cols-2">
           <div>
             <SectionHeading
-              title="A diversified business, built in Ghana"
-              intro="We started in construction and grew into commodities, trade, gold, manufacturing and merchandise. The aim has stayed the same: dependable supply and work done properly, for clients at home and abroad."
+              title="Built in Ghana, one trade at a time"
+              intro="We began as a construction company in Accra and grew into commodities, freight, gold, manufacturing and merchandise. How we work has not changed: clear terms, reliable supply and jobs finished properly."
             />
             <dl className="mt-10 grid grid-cols-3 gap-6 border-t border-line pt-8">
               {FIGURES.map((f) => (

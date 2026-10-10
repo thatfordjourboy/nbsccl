@@ -112,10 +112,10 @@ export function Steps({ items }: { items: { marker: string; title: string; descr
   );
 }
 
-/** Closing band on every page: real contact details, not a generic "ready to start?" prompt. */
+/** Closing band on every page: real contact details, not a generic prompt. */
 export function ContactBand({
-  heading = 'Talk to our team',
-  text = 'Tell us what you need and we will reply within 24 hours. You can also call or visit our Spintex Road office.',
+  heading = 'Tell us what you need',
+  text = 'Send an enquiry and we will reply within 24 hours. Prefer to talk? Call us, or visit our Spintex Road office.',
   label = 'Send an enquiry',
   service,
 }: {

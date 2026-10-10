@@ -44,6 +44,11 @@ Draft. Code is pre-launch ready; launch is blocked on the **client** and **deplo
 
 ## Changelog
 
+### 2026-10-10: Copy rewrite
+- Rewrote site copy in one voice: short, concrete, sentence case, written for buyers, shippers and gold sellers. Home hero is now "Buildings, commodities, gold and freight. One Accra company, from first enquiry to final delivery."
+- Every service page, the About story, values and timeline, contact page, service summaries, footer and all meta descriptions updated. Calls to action now say what happens ("Request a freight quote", "Get today's gold rate").
+- No new facts: claims awaiting client confirmation are unchanged in substance (see open items).
+
 ### 2026-10-10: Redesign (branch `fix/audit-findings`)
 - New design system from the client logo (plum + gold) with Archivo variable type; tokens in `src/index.css`, rules in CLAUDE.md.
 - Client logo added (keyed transparent PNG), plus favicon, apple-touch icon and share image made from it.

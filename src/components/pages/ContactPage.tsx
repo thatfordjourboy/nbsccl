@@ -58,7 +58,7 @@ export function ContactPage() {
     <>
       <PageHero
         title="Contact us"
-        intro="Tell us about your project, shipment or order. We reply to every enquiry within 24 hours."
+        intro="Tell us about your project, shipment or order. We reply within 24 hours."
       />
 
       <section className="py-16 sm:py-24">
@@ -112,7 +112,7 @@ export function ContactPage() {
                 maxLength={2000}
                 rows={6}
                 className="min-h-40"
-                placeholder="Goods, quantities, locations, timelines: whatever helps us quote."
+                placeholder="What you need, how much, where and by when."
               />
             </Field>
 
