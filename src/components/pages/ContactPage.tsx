@@ -151,6 +151,9 @@ export function ContactPage() {
           title="Map showing NB Sebastian's office near Inkoom Hospital, Spintex Road, Accra"
           src="https://www.google.com/maps?q=Inkoom+Hospital,+Spintex+Road,+Accra,+Ghana&output=embed"
           className="h-full w-full border-0"
+          // Google's embed needs scripts and its own origin; it may open Maps in a new tab but cannot navigate this page.
+          sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+          referrerPolicy="strict-origin-when-cross-origin"
           allowFullScreen
           loading="lazy"
         />

@@ -34,7 +34,7 @@ export function HomePage() {
       <section className="relative isolate flex min-h-[calc(100svh-72px)] flex-col overflow-hidden bg-brand text-white">
         <HeroMap />
         <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-brand via-brand/75 to-brand/10 lg:bg-gradient-to-r lg:from-brand lg:via-brand/60 lg:to-transparent"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-brand via-brand/75 to-brand/10 lg:bg-gradient-to-r lg:from-brand lg:from-35% lg:via-brand/85 lg:via-55% lg:to-transparent lg:to-80%"
           aria-hidden="true"
         />
         <Container className="relative flex flex-1 flex-col justify-center py-20">

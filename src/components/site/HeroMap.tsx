@@ -147,10 +147,10 @@ export function HeroMap() {
         transition={t(1.2, 0.5)}
       />
       <motion.g initial={from({ opacity: 0 })} animate={{ opacity: 1 }} transition={t(1.5, 0.8)}>
-        <text x={ACCRA[0] + 14} y={ACCRA[1] - 10} fill="white" fontSize={15} fontWeight={600}>
+        <text x={ACCRA[0] + 14} y={ACCRA[1] - 10} fill="white" fontSize={15} fontWeight={600} stroke="var(--color-brand)" strokeWidth={5} strokeLinejoin="round" paintOrder="stroke">
           Accra
         </text>
-        <text x={ACCRA[0] + 14} y={ACCRA[1] + 8} fill="white" fillOpacity={0.55} fontSize={12}>
+        <text x={ACCRA[0] + 14} y={ACCRA[1] + 8} fill="white" fillOpacity={0.7} fontSize={12} stroke="var(--color-brand)" strokeWidth={5} strokeLinejoin="round" paintOrder="stroke">
           5.60°N 0.19°W
         </text>
       </motion.g>

@@ -28,6 +28,8 @@ Draft. Code is pre-launch ready; launch is blocked on the **client** and **deplo
 - [ ] After the first deploy: check the headers on securityheaders.com, test the form end to end, confirm `/random-path` returns 404, then submit `sitemap.xml` in Google Search Console.
 - [ ] HSTS is set with `preload`. Only submit to hstspreload.org once every subdomain serves HTTPS.
 
+- [ ] **Canonical domain**: the site is live at `nbsccl.vercel.app`, but canonical URLs, sitemap and share tags point at `https://www.nbsccl.com` (the default). Either connect `www.nbsccl.com` in Vercel, or set `VITE_SITE_URL=https://nbsccl.vercel.app` in Vercel env vars until the domain is ready.
+
 ### Known limitations (deliberate)
 - **Head-only prerender**: crawlers get correct titles/meta per route, but body text is client-rendered. Google renders JS, so this is fine for now. Move to full SSG (e.g. `vite-react-ssg`) if rankings need it.
 - **Contact rate limit is in-memory per function instance** (5 requests / 10 min / IP). Move to Vercel KV / Upstash if spam gets through Turnstile + honeypot.
@@ -44,6 +46,22 @@ Draft. Code is pre-launch ready; launch is blocked on the **client** and **deplo
 - **2026-10-10**: Page titles use the `"<Page> - NBSCCL"` format (kept from commit 8b0a5a4).
 
 ## Changelog
+
+### 2026-10-10: Security hardening, logo tint, hero polish
+**Security** (`api/contact.ts`, `vercel.json`, `ContactPage.tsx`; covered by `tests/contact.test.ts`, 9 tests)
+- Contact endpoint only accepts same-origin `application/json` posts. Previously any site could make its visitors' browsers post `text/plain` bodies to it (cross-site spam relay that also spread load across many IPs to dodge the rate limit).
+- Client IP taken from `x-real-ip` (set by Vercel) instead of the first `x-forwarded-for` entry.
+- Rate-limit map is bounded (5,000 IPs), so an IP flood can no longer grow memory without limit.
+- Request bodies capped at 10 KB before parsing; outbound Turnstile and Resend calls time out after 8 s; Resend network failures handled.
+- Email validation tightened so Reply-To can only ever contain one address (no `,;<>"`).
+- API responses are `Cache-Control: no-store` and `X-Robots-Tag: noindex`.
+- Wider `Permissions-Policy`; `X-Permitted-Cross-Domain-Policies: none`.
+- Google Maps iframe sandboxed (cannot navigate the page).
+- Verified every route against the production CSP in Edge: no violations or errors; unknown paths return 404.
+
+**Design**
+- Logo yellow (#FDD100) tinted to the site gold (#DDB84F) in the web copies only (`public/logo.png`, `logo-mark.png`, icons, share image). The client's original file is unchanged.
+- Hero: west-bound routes fade out behind the headline; Accra label has a halo for legibility.
 
 ### 2026-10-10: Milder palette
 - Switched brand colours to forest green + soft gold (client request). Tokens renamed to `brand`, `brand-deep`, `brand-soft`; paper, ink, slate and line retuned to neutral greens. Favicon, touch icon and share image regenerated on the new green; `theme-color` updated.
