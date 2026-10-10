@@ -24,7 +24,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
         <div className="min-h-screen flex items-center justify-center p-8 text-center">
           <div>
             <h1 className="text-2xl font-bold mb-3">Something went wrong.</h1>
-            <p className="text-gray-600">Please refresh the page or try again later.</p>
+            <p className="text-slate">Please refresh the page or try again later.</p>
             {import.meta.env.DEV && this.state.error && (
               <pre className="mt-4 text-left text-sm text-red-600 whitespace-pre-wrap">
                 {String(this.state.error?.message || this.state.error)}

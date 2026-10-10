@@ -1,244 +1,223 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Building, Package, Plane, Coins, Factory, ShoppingBag } from 'lucide-react';
-import { Button } from '../ui/button';
-import { Card } from '../ui/card';
+import { ArrowUpRight } from 'lucide-react';
 import { motion } from 'motion/react';
+import { Button } from '../ui/button';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
+import { HeroMap } from '../site/HeroMap';
+import { Container, ContactBand, SectionHeading, Steps } from '../site/blocks';
+import { Ticker } from '../site/Ticker';
+import { FIGURES, SERVICES, unsplash } from '../../services';
 
-const services = [
-  {
-    icon: Building,
-    title: 'Construction',
-    description: 'Comprehensive construction services from residential to commercial projects.',
-    href: '/construction',
-    color: 'bg-blue-50 text-blue-600'
-  },
-  {
-    icon: Package,
-    title: 'Commodities',
-    description: 'Trading in essential commodities including agricultural and industrial materials.',
-    href: '/commodities',
-    color: 'bg-green-50 text-green-600'
-  },
-  {
-    icon: Plane,
-    title: 'Import & Export',
-    description: 'Global trade solutions with expertise in international logistics.',
-    href: '/import-export',
-    color: 'bg-purple-50 text-purple-600'
-  },
-  {
-    icon: Coins,
-    title: 'Gold Purchasing',
-    description: 'Professional gold procurement and trading services.',
-    href: '/gold',
-    color: 'bg-yellow-50 text-yellow-600'
-  },
-  {
-    icon: Factory,
-    title: 'Manufacturing',
-    description: 'State-of-the-art manufacturing capabilities across diverse industries.',
-    href: '/manufacturing',
-    color: 'bg-red-50 text-red-600'
-  },
-  {
-    icon: ShoppingBag,
-    title: 'General Merchandise',
-    description: 'Wide range of consumer and industrial products for global distribution.',
-    href: '/merchandise',
-    color: 'bg-indigo-50 text-indigo-600'
-  }
+const EASE = [0.16, 1, 0.3, 1] as const;
+const HEADLINE = ['Trading from', 'the centre', 'of the map.'];
+
+const PROCESS = [
+  { title: 'Tell us what you need', description: 'Call, email or send an enquiry with the goods, quantities or project you have in mind, and your timeline.' },
+  { title: 'We plan and quote', description: 'We work out sourcing, pricing and logistics, then send you a clear quote to review.' },
+  { title: 'We handle the paperwork', description: 'Contracts, customs documentation and regulatory checks are prepared and filed for you.' },
+  { title: 'Delivery and follow-up', description: 'We coordinate transport and keep you updated until the goods arrive or the work is handed over.' },
+];
+
+const VALUES = [
+  { title: 'Integrity', description: 'Clear terms, honest pricing and full documentation.' },
+  { title: 'Partnership', description: 'Long relationships with clients, suppliers and communities.' },
+  { title: 'Excellence', description: 'Work checked properly and delivered to standard.' },
+  { title: 'Global reach', description: 'Local knowledge in Accra, partners across continents.' },
+  { title: 'Innovation', description: 'Better methods and tools, adopted when they help clients.' },
+  { title: 'Sustainability', description: 'Practices that hold up for the next generation.' },
 ];
 
 export function HomePage() {
   return (
-    <div>
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
-          <ImageWithFallback
-            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070"
-            alt="Modern cityscape"
-            className="w-full h-full object-cover opacity-30"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-        </div>
-        
-        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6"
+    <>
+      {/* Hero: the Equator and Prime Meridian meet just south of Accra */}
+      <section className="relative isolate flex min-h-[calc(100svh-72px)] flex-col overflow-hidden bg-plum text-white">
+        <HeroMap />
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-plum via-plum/75 to-plum/10 lg:bg-gradient-to-r lg:from-plum lg:via-plum/60 lg:to-transparent"
+          aria-hidden="true"
+        />
+        <Container className="relative flex flex-1 flex-col justify-center py-20">
+          <h1 className="font-display text-[clamp(2.9rem,7.2vw,6.4rem)]">
+            {HEADLINE.map((line, i) => (
+              <span key={line} className="block overflow-hidden pb-[0.06em]">
+                <motion.span
+                  className="block"
+                  initial={{ y: '105%' }}
+                  animate={{ y: 0 }}
+                  transition={{ duration: 1.1, delay: 0.25 + i * 0.12, ease: EASE }}
+                >
+                  {line}
+                </motion.span>
+              </span>
+            ))}
+          </h1>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.9 }}
           >
-            Building Tomorrow's
-            <span className="block text-blue-400">Global Economy</span>
-          </motion.h1>
-          
-          <motion.p 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto"
-          >
-            NB Sebastian Commodities Company Ltd. - Leading international corporation specializing in construction, commodities, manufacturing, 
-            and global trade solutions with over two decades of excellence.
-          </motion.p>
-          
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
-              <Link to="/about" className="flex items-center">
-                Discover Our Story
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-            </Button>
-            <Button asChild variant="outline" size="lg" className="border-white text-white bg-transparent hover:bg-white hover:text-gray-900">
-              <Link to="/contact">Get In Touch</Link>
-            </Button>
+            <p className="mt-8 max-w-lg text-lg text-white/80 sm:text-xl">
+              NB Sebastian Commodities Company is an Accra business working in construction, commodities trading, import and
+              export, gold purchasing, manufacturing and general merchandise.
+            </p>
+            <div className="mt-10 flex flex-wrap gap-4">
+              <Button asChild size="lg" variant="gold">
+                <Link to="/contact">Talk to our team</Link>
+              </Button>
+              <Button asChild size="lg" variant="outline-light">
+                <a href="#services">See what we do</a>
+              </Button>
+            </div>
           </motion.div>
-        </div>
+        </Container>
+        <Container className="relative pb-8">
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 2.2 }}
+            className="flex max-w-md gap-3 border-t border-white/20 pt-5 text-sm text-white/65"
+          >
+            <span className="mt-[0.45em] h-1.5 w-1.5 shrink-0 rounded-full bg-gold" aria-hidden="true" />
+            The Prime Meridian runs through Tema, minutes from our Spintex Road office. About 600 km south, it crosses the
+            Equator.
+          </motion.p>
+        </Container>
+      </section>
 
-        {/* Scroll indicator */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        >
-          <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
-            <motion.div 
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="w-1 h-3 bg-white rounded-full mt-2"
+      <Ticker />
+
+      {/* Services index */}
+      <section id="services" className="scroll-mt-[72px] py-20 sm:py-28">
+        <Container>
+          <SectionHeading
+            title="Six trades, one office in Accra"
+            intro="From building sites to bullion. Choose a line of business to see what we offer and how to start."
+          />
+          <ul className="mt-14 border-b border-line">
+            {SERVICES.map((s) => (
+              <li key={s.href} className="border-t border-line">
+                <Link
+                  to={s.href}
+                  className="group relative grid items-center gap-x-10 gap-y-2 py-7 sm:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)_auto] sm:py-9"
+                >
+                  <span className="font-display text-[1.9rem] leading-none transition-colors duration-300 group-hover:text-plum sm:text-5xl">
+                    {s.name}
+                  </span>
+                  <span className="max-w-sm text-slate">{s.summary}</span>
+                  <span className="hidden items-center gap-6 sm:flex">
+                    <span className="relative h-20 w-32 overflow-hidden transition-[clip-path] duration-500 ease-out [clip-path:inset(0_0_0_100%)] group-hover:[clip-path:inset(0)] group-focus-visible:[clip-path:inset(0)]">
+                      <ImageWithFallback src={s.image} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+                    </span>
+                    <span className="flex h-12 w-12 items-center justify-center rounded-full border border-ink/20 transition-colors duration-300 group-hover:border-plum group-hover:bg-plum group-hover:text-white">
+                      <ArrowUpRight className="h-5 w-5" />
+                    </span>
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Container>
+      </section>
+
+      {/* Gold spotlight */}
+      <section className="bg-plum-deep text-white">
+        <div className="grid lg:grid-cols-2">
+          <div className="relative min-h-80 lg:min-h-[36rem]">
+            <ImageWithFallback
+              src={unsplash('1610375461246-83df859d849d', 1400)}
+              alt="Gold bars"
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover"
             />
           </div>
-        </motion.div>
-      </section>
-
-      {/* Services Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Comprehensive Business Solutions
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              From construction to commodities, we deliver excellence across diverse industries 
-              with a commitment to quality, innovation, and global reach.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <motion.div
-                key={service.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <Card className="p-6 h-full hover:shadow-lg transition-shadow duration-300 group cursor-pointer">
-                  <Link to={service.href} className="block h-full">
-                    <div className={`w-12 h-12 rounded-lg ${service.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                      <service.icon className="h-6 w-6" />
-                    </div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
-                      {service.title}
-                    </h3>
-                    <p className="text-gray-600 mb-4">
-                      {service.description}
-                    </p>
-                    <div className="flex items-center text-blue-600 group-hover:translate-x-2 transition-transform duration-300">
-                      <span className="text-sm font-medium">Learn More</span>
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </div>
-                  </Link>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="text-center"
-            >
-              <div className="text-4xl font-bold text-blue-600 mb-2">25+</div>
-              <div className="text-gray-600">Years of Excellence</div>
-            </motion.div>
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="text-center"
-            >
-              <div className="text-4xl font-bold text-blue-600 mb-2">50+</div>
-              <div className="text-gray-600">Countries Served</div>
-            </motion.div>
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              viewport={{ once: true }}
-              className="text-center"
-            >
-              <div className="text-4xl font-bold text-blue-600 mb-2">1000+</div>
-              <div className="text-gray-600">Successful Projects</div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-800">
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-bold text-white mb-6"
-          >
-            Ready to Start Your Next Project?
-          </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="text-xl text-blue-100 mb-8"
-          >
-            Let's discuss how our expertise can drive your business forward.
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            viewport={{ once: true }}
-          >
-            <Button asChild size="lg" variant="outline" className="border-white text-white bg-transparent hover:bg-white hover:text-blue-600">
-              <Link to="/contact" className="flex items-center">
-                Contact Us Today
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
+          <div className="px-5 py-20 sm:px-12 lg:px-16 lg:py-28 xl:pr-[max(4rem,calc((100vw-80rem)/2+2rem))]">
+            <p className="text-gold-soft">Ghana is Africa&apos;s largest gold producer.</p>
+            <h2 className="mt-4 font-display text-4xl sm:text-5xl text-balance">Gold purchasing, done in the open</h2>
+            <dl className="mt-12 space-y-8">
+              {[
+                ['Transparent rates', 'Prices are set against the market and explained before you agree to anything.'],
+                ['Tested purity', 'Every lot is assessed and certified using established testing methods.'],
+                ['Full documentation', 'Each transaction is recorded and documented from weighing to payment.'],
+              ].map(([title, text]) => (
+                <div key={title} className="border-t border-white/15 pt-5">
+                  <dt className="font-heading text-xl text-gold">{title}</dt>
+                  <dd className="mt-2 text-white/70">{text}</dd>
+                </div>
+              ))}
+            </dl>
+            <Button asChild size="lg" variant="gold" className="mt-12">
+              <Link to="/gold">About gold purchasing</Link>
             </Button>
-          </motion.div>
+          </div>
         </div>
       </section>
-    </div>
+
+      {/* How working with us goes */}
+      <section className="py-20 sm:py-28">
+        <Container className="grid gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-5">
+            <div className="lg:sticky lg:top-28">
+              <SectionHeading
+                title="How working with us goes"
+                intro="The same four steps whether you are buying cocoa, shipping freight or starting a building project."
+              />
+            </div>
+          </div>
+          <div className="lg:col-span-7">
+            <Steps items={PROCESS.map((p, i) => ({ ...p, marker: `Step ${i + 1}` }))} />
+          </div>
+        </Container>
+      </section>
+
+      {/* Who we are */}
+      <section className="bg-white py-20 sm:py-28">
+        <Container className="grid items-center gap-14 lg:grid-cols-2">
+          <div>
+            <SectionHeading
+              title="A diversified business, built in Ghana"
+              intro="We started in construction and grew into commodities, trade, gold, manufacturing and merchandise. The aim has stayed the same: dependable supply and work done properly, for clients at home and abroad."
+            />
+            <dl className="mt-10 grid grid-cols-3 gap-6 border-t border-line pt-8">
+              {FIGURES.map((f) => (
+                <div key={f.label}>
+                  <dt className="sr-only">{f.label}</dt>
+                  <dd className="font-display text-3xl text-plum sm:text-4xl">{f.value}</dd>
+                  <dd className="mt-2 text-sm text-slate">{f.label}</dd>
+                </div>
+              ))}
+            </dl>
+            <Button asChild variant="outline" size="lg" className="mt-10">
+              <Link to="/about">Read our story</Link>
+            </Button>
+          </div>
+          <div className="aspect-[4/3] overflow-hidden bg-plum">
+            <ImageWithFallback
+              src={unsplash('1497366216548-37526070297c', 1200)}
+              alt="An open-plan office"
+              loading="lazy"
+              className="h-full w-full object-cover"
+            />
+          </div>
+        </Container>
+      </section>
+
+      {/* Values */}
+      <section className="py-20 sm:py-28">
+        <Container>
+          <SectionHeading title="What we stand for" />
+          <dl className="mt-12 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+            {VALUES.map((v) => (
+              <div key={v.title} className="border-l-[3px] border-plum pl-5">
+                <dt className="font-heading text-xl">{v.title}</dt>
+                <dd className="mt-2 text-slate">{v.description}</dd>
+              </div>
+            ))}
+          </dl>
+        </Container>
+      </section>
+
+      <ContactBand />
+    </>
   );
 }

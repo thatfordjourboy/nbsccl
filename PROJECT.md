@@ -10,10 +10,13 @@ Draft. Code is pre-launch ready; launch is blocked on the **client** and **deplo
 
 ### Blocked on client (content / legal)
 - [ ] **Confirm or remove business claims**: "25+ years", "50+ countries", "1000+ projects", "over two decades" (HomePage, AboutPage, Footer, HomePage hero). Unverifiable claims are a legal risk, especially for gold purchasing.
+- [ ] **Construction "Featured projects" look like template filler**: Manhattan Business Center (New York), Riverside Residences (London), Tech Manufacturing Hub (Singapore). Replace them with real projects or remove the section (`ConstructionPage.tsx`, `showcase`).
+- [ ] **Manufacturing certifications**: the site claims ISO 9001:2015, ISO 14001 and "Industry 4.0". Confirm the certificates exist or remove them (`ManufacturingPage.tsx`). The Gold page claims a "99.9% purity guarantee" and "licensed precious metals dealers": confirm the licence.
+- [ ] **Founding year and timeline** (About page: 2000 founding, 2005 international office, etc.) need confirming along with the figures, which now live in one place: `FIGURES` in `src/services.ts`.
 - [ ] **One email domain**: the site uses `@nbsebastian.com` and a Gmail address, and the site domain is `nbsccl.com`. Pick one domain and confirm `info@`, `sales@`, `privacy@`, `legal@` receive mail.
 - [ ] **Exact map location**: the map is a search for "Inkoom Hospital, Spintex Road". Replace it with an embed of the office's own Google Business pin (`ContactPage.tsx`).
-- [ ] **Own photography**: all 16 images are Unsplash stock, hotlinked. Replace them with company photos in `public/images/`, then remove `https://images.unsplash.com` from the CSP and the privacy policy.
-- [ ] **Real share image and logo**: `public/og-image.png` and `public/favicon.svg` are text placeholders.
+- [ ] **Own photography**: all images are Unsplash stock, hotlinked. Replace them with company photos in `public/images/`, then remove `https://images.unsplash.com` from the CSP and the privacy policy.
+- [ ] **Vector logo**: `public/logo.png`, favicon and share image are cut from a 1080px JPEG the client supplied. Ask for the original SVG/AI/PDF logo for sharper rendering.
 - [ ] **Social profiles**: LinkedIn/Twitter icons were removed because they linked nowhere. Re-add them with real URLs if the profiles exist.
 - [ ] **Legal review** of the Privacy Policy (Ghana Data Protection Act 2012, Act 843) and Terms. Update the "Last updated" dates when they change.
 - [ ] **Careers / News pages**: links removed. Add them back if those pages are wanted.
@@ -32,12 +35,24 @@ Draft. Code is pre-launch ready; launch is blocked on the **client** and **deplo
 - Unused theme tokens for dark mode remain in `src/index.css` (harmless).
 
 ## Decisions
+- **2026-10-10**: Visual identity follows the client logo: plum #7D0147 + gold #FDD100. Site type is Archivo (variable width), contrasting with the logo's classical serif caps.
+- **2026-10-10**: Home hero concept "Trading from the centre of the map": the Prime Meridian runs through Tema and meets the Equator in the Gulf of Guinea. Animated graticule + trade routes radiating from Accra (`HeroMap.tsx`). Routes go to major global hubs and are deliberately unlabelled, so they don't imply specific client relationships.
 - **2026-10-10**: Tailwind compiled at build time (`@tailwindcss/vite`) instead of a frozen precompiled CSS file, because new classes were silently missing (e.g. map height).
 - **2026-10-10**: Contact form uses native HTML validation + server validation; dropped zod / react-hook-form / Radix Select (bundle 167 kB → 10 kB).
 - **2026-10-10**: Mail is delivered via Resend's REST API from a Vercel function (no SDK dependency).
 - **2026-10-10**: Page titles use the `"<Page> - NBSCCL"` format (kept from commit 8b0a5a4).
 
 ## Changelog
+
+### 2026-10-10: Redesign (branch `fix/audit-findings`)
+- New design system from the client logo (plum + gold) with Archivo variable type; tokens in `src/index.css`, rules in CLAUDE.md.
+- Client logo added (keyed transparent PNG), plus favicon, apple-touch icon and share image made from it.
+- Home: animated map hero (Equator, Prime Meridian, routes from Accra with moving cargo dots), goods ticker, services index with hover image reveal, gold spotlight, scroll-drawn "how working with us goes" steps, figures, values, contact band.
+- All six service pages rebuilt on one `ServicePage` template (hero with photo reveal, offerings, categories/showcase, process steps, assurances, other services, contact band). The Gold page gained a selling process.
+- About: story with figures, values, scroll-drawn timeline. Contact: new layout and plain-language toasts. Privacy, Terms and 404 use the new hero.
+- Header: plum bar, Services mega-menu with summaries, gold Contact button, full mobile menu. Footer rebuilt from shared data.
+- Fixed images: the gold photo was a dead link (404) on the old site; the Commodities, Import & Export and Manufacturing heroes showed a phone, a black texture and parked trucks. All replaced with photos that match the section.
+- Removed the Card component (unused).
 
 ### 2026-10-10: Audit fixes (branch `fix/audit-findings`)
 **Security**

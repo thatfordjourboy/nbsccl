@@ -1,87 +1,55 @@
 import { Link } from 'react-router-dom';
-import { Building2, Mail, Phone, MapPin } from 'lucide-react';
+import { Logo } from './site/Logo';
+import { CONTACT, SERVICES, tel } from '../services';
 
 export function Footer() {
   return (
-    <footer className="bg-gray-900 text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Company Info */}
-          <div className="space-y-4">
-            <div className="flex items-center space-x-2">
-              <Building2 className="h-6 w-6" />
-              <span className="font-semibold text-lg">NB Sebastian</span>
-            </div>
-            <p className="text-gray-300 text-sm">
-              NB Sebastian Commodities Company Ltd. - Leading the way in construction, commodities, manufacturing, and international trade with over two decades of excellence.
+    <footer className="bg-plum-deep text-white/75">
+      <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
+          <div>
+            <Logo className="h-11" />
+            <p className="mt-6 max-w-xs text-sm">
+              Construction, commodities, import and export, gold purchasing, manufacturing and general merchandise, from Accra.
             </p>
           </div>
 
-          {/* Services */}
-          <div className="space-y-4">
-            <h3 className="font-semibold">Our Services</h3>
-            <ul className="space-y-2 text-sm">
-              <li><Link to="/construction" className="text-gray-300 hover:text-white transition-colors">Construction</Link></li>
-              <li><Link to="/commodities" className="text-gray-300 hover:text-white transition-colors">Commodities</Link></li>
-              <li><Link to="/import-export" className="text-gray-300 hover:text-white transition-colors">Import & Export</Link></li>
-              <li><Link to="/gold" className="text-gray-300 hover:text-white transition-colors">Gold Purchasing</Link></li>
-              <li><Link to="/manufacturing" className="text-gray-300 hover:text-white transition-colors">Manufacturing</Link></li>
-              <li><Link to="/merchandise" className="text-gray-300 hover:text-white transition-colors">General Merchandise</Link></li>
+          <nav aria-label="Services">
+            <h2 className="font-heading text-sm text-white">Services</h2>
+            <ul className="mt-4 space-y-2 text-sm">
+              {SERVICES.map((s) => (
+                <li key={s.href}><Link to={s.href} className="hover:text-white">{s.name}</Link></li>
+              ))}
             </ul>
-          </div>
+          </nav>
 
-          {/* Quick Links */}
-          <div className="space-y-4">
-            <h3 className="font-semibold">Company</h3>
-            <ul className="space-y-2 text-sm">
-              <li><Link to="/about" className="text-gray-300 hover:text-white transition-colors">About Us</Link></li>
-              <li><Link to="/contact" className="text-gray-300 hover:text-white transition-colors">Contact</Link></li>
+          <nav aria-label="Company">
+            <h2 className="font-heading text-sm text-white">Company</h2>
+            <ul className="mt-4 space-y-2 text-sm">
+              <li><Link to="/about" className="hover:text-white">About us</Link></li>
+              <li><Link to="/contact" className="hover:text-white">Contact</Link></li>
+              <li><Link to="/privacy" className="hover:text-white">Privacy policy</Link></li>
+              <li><Link to="/terms" className="hover:text-white">Terms of service</Link></li>
             </ul>
-          </div>
+          </nav>
 
-          {/* Contact Info */}
-          <div className="space-y-4">
-            <h3 className="font-semibold">Contact Info</h3>
-            <div className="space-y-3 text-sm">
-              <div className="flex items-center space-x-2">
-                <MapPin className="h-4 w-4 text-gray-400 shrink-0" />
-                <span className="text-gray-300">Behind Inkoom Hospital, Spintex Road (G6-166-0779)</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Phone className="h-4 w-4 text-gray-400" />
-                <a href="tel:+233200252498" className="text-gray-300 hover:text-white">+233 200252498</a>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Phone className="h-4 w-4 text-gray-400" />
-                <a href="tel:+233550974525" className="text-gray-300 hover:text-white">+233 550974525</a>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Mail className="h-4 w-4 text-gray-400" />
-                <a href="mailto:info@nbsebastian.com" className="text-gray-300 hover:text-white">info@nbsebastian.com</a>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Mail className="h-4 w-4 text-gray-400" />
-                <a href="mailto:sales@nbsebastian.com" className="text-gray-300 hover:text-white">sales@nbsebastian.com</a>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Mail className="h-4 w-4 text-gray-400" />
-                <a href="mailto:nbsebastianccl@gmail.com" className="text-gray-300 hover:text-white">nbsebastianccl@gmail.com</a>
-              </div>
-            </div>
+          <div className="text-sm">
+            <h2 className="font-heading text-white">Get in touch</h2>
+            <address className="mt-4 not-italic">{CONTACT.address.join(', ')}</address>
+            <ul className="mt-4 space-y-1">
+              {CONTACT.phones.map((p) => (
+                <li key={p}><a href={tel(p)} className="hover:text-white">{p}</a></li>
+              ))}
+              {CONTACT.emails.map((e) => (
+                <li key={e}><a href={`mailto:${e}`} className="break-all hover:text-white">{e}</a></li>
+              ))}
+            </ul>
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-12 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 text-sm">
-              © {new Date().getFullYear()} NB Sebastian Commodities Company Ltd. All rights reserved.
-            </p>
-            <nav aria-label="Legal" className="flex space-x-6 mt-4 md:mt-0">
-              <Link to="/privacy" className="text-gray-400 hover:text-white text-sm transition-colors">Privacy Policy</Link>
-              <Link to="/terms" className="text-gray-400 hover:text-white text-sm transition-colors">Terms of Service</Link>
-            </nav>
-          </div>
-        </div>
+        <p className="mt-14 border-t border-white/15 pt-8 text-xs text-white/50">
+          © {new Date().getFullYear()} NB Sebastian Commodities Company Limited. All rights reserved.
+        </p>
       </div>
     </footer>
   );

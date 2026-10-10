@@ -26,8 +26,11 @@ npm run preview    # serve build/
 | `src/routes.json` | **Single source of truth for routes**: path, `<title>`, meta description. Used by `Seo.tsx`, `scripts/prerender.mjs` and the sitemap. |
 | `src/App.tsx` | Router. Pages are lazy-loaded. |
 | `src/components/pages/` | One file per page. |
-| `src/components/ui/` | Kept shadcn components (button, card, input, label, textarea, sonner). Delete what you stop using. |
-| `src/index.css` | Tailwind source (`@import "tailwindcss"` + theme tokens). Compiled at build time. |
+| `src/services.ts` | The six business lines (name, link, summary, image), contact details and company figures. Header, footer, home page and contact form all read from here. |
+| `src/components/site/` | Design-system building blocks: `PageHero`, `SectionHeading`, `Steps`, `ContactBand`, `Container`, `ServicePage` template, `HeroMap`, `Ticker`, `Logo`. |
+| `src/components/ui/` | Kept shadcn components (button, input, label, textarea, sonner). Delete what you stop using. |
+| `src/index.css` | Tailwind source: brand tokens, font, `font-display` / `font-heading` utilities. Compiled at build time. |
+| `public/logo.png`, `logo-mark.png` | Client logo, keyed out of its plum background. Only place it on plum surfaces. |
 | `api/contact.ts` | Vercel function: validation, honeypot, rate limit, Turnstile, sends mail via Resend. |
 | `scripts/prerender.mjs` | Post-build: per-route HTML with correct head tags, `404.html`, `sitemap.xml`. |
 | `vercel.json` | Security headers (CSP, HSTS, ...) and caching. |
@@ -47,6 +50,14 @@ The sitemap and prerendered HTML update automatically.
 - The server (`api/contact.ts`) is the source of truth for validation; client-side checks are UX only. Keep `tests/contact.test.ts` passing and extend it when you change validation.
 - The contact form must never report success unless the server confirmed delivery.
 - Run `npm audit` when touching dependencies; ship with 0 high/critical.
+
+### Design system (do not drift)
+- **Colours come from the client logo**: `plum` #7D0147 (brand surfaces, header, heroes), `plum-deep` (footer, contact band, gold spotlight), `gold` #FDD100 (accent **on plum only**; it fails contrast on light backgrounds), `paper` (page background), `ink` (text), `slate` (secondary text), `line` (rules). Use the tokens, never raw hex or Tailwind palette colours like `blue-600`.
+- **Type**: Archivo variable only. `font-display` (expanded, heavy) for hero and page titles and big service names; `font-heading` for section and item headings; normal Archivo for body. Sentence case everywhere; no all-caps labels.
+- **Layout**: left-aligned; `Container` for width; sections are `py-20 sm:py-28`. Lists separated by hairline rules, not rows of identical icon cards. Don't add icon tiles.
+- **New service page** = data passed to `ServicePage` (see `GoldPage.tsx`). Add the service to `src/services.ts` and `src/routes.json` too.
+- **Motion budget**: the home hero sequence (`HeroMap` + headline), the photo opening in `PageHero`, the `Ticker`, scroll-drawn `Steps` lines (only for real sequences), and hover responses. Don't add fade-up-on-scroll to sections. Everything must respect reduced motion (`MotionConfig reducedMotion="user"`, `useReducedMotion`, `motion-reduce:`).
+- **Copy**: plain, specific, sentence case. Buttons say what happens ("Request a gold quote"), not "Learn more". Don't invent facts about the company: only use what the client has provided (see PROJECT.md open items).
 
 ### Code style
 - Use Tailwind classes; they are compiled at build time, so any class works. Don't hand-edit compiled CSS.

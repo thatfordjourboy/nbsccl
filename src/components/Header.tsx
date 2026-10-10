@@ -1,167 +1,132 @@
-import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Building2 } from 'lucide-react';
-import { Button } from './ui/button';
-import { motion, AnimatePresence } from 'motion/react';
+import { useEffect, useState } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
+import { ChevronDown, Menu, X } from 'lucide-react';
+import { AnimatePresence, motion } from 'motion/react';
+import { Logo } from './site/Logo';
+import { SERVICES } from '../services';
+
+const linkClass = ({ isActive }: { isActive: boolean }) =>
+  `relative py-2 transition-colors hover:text-white ${isActive ? 'text-white after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:bg-gold' : 'text-white/75'}`;
 
 export function Header() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const location = useLocation();
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const { pathname } = useLocation();
+  const onService = SERVICES.some((s) => s.href === pathname);
 
-  const navigation = [
-    { name: 'Home', href: '/' },
-    { name: 'About', href: '/about' },
-    { 
-      name: 'Services', 
-            subItems: [
-        { name: 'Construction', href: '/construction' },
-        { name: 'Commodities', href: '/commodities' },
-        { name: 'Import & Export', href: '/import-export' },
-        { name: 'Gold Purchasing', href: '/gold' },
-        { name: 'Manufacturing', href: '/manufacturing' },
-        { name: 'General Merchandise', href: '/merchandise' },
-      ]
-    },
-    { name: 'Contact', href: '/contact' },
-  ];
-
-  const [hoveredService, setHoveredService] = useState(false);
+  // Close menus whenever the route changes.
+  useEffect(() => {
+    setMobileOpen(false);
+    setServicesOpen(false);
+  }, [pathname]);
 
   return (
-    <header className="bg-white/95 backdrop-blur-sm border-b border-gray-100 sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-4">
-          {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <Building2 className="h-8 w-8 text-primary" />
-            <span className="font-semibold text-xl text-primary">NB Sebastian</span>
-          </Link>
+    <header className="sticky top-0 z-50 bg-plum text-white">
+      <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-5 sm:px-8">
+        <Logo />
 
-          {/* Desktop Navigation */}
-          <nav aria-label="Main" className="hidden lg:flex items-center space-x-8">
-            {navigation.map((item) => (
-              <div key={item.name} className="relative">
-                {item.subItems ? (
-                  <div
-                    className="relative"
-                    onMouseEnter={() => setHoveredService(true)}
-                    onMouseLeave={() => setHoveredService(false)}
-                    onBlur={(e) => {
-                      if (!e.currentTarget.contains(e.relatedTarget)) setHoveredService(false);
-                    }}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Escape') setHoveredService(false);
-                    }}
-                  >
-                    <button
-                      type="button"
-                      aria-expanded={hoveredService}
-                      aria-controls="services-menu"
-                      onClick={() => setHoveredService((open) => !open)}
-                      className="text-foreground hover:text-primary transition-colors duration-200 py-2"
-                    >
-                      {item.name}
-                    </button>
-                    <AnimatePresence>
-                      {hoveredService && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: 10 }}
-                          transition={{ duration: 0.2 }}
-                          id="services-menu"
-                          className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-100 py-2"
-                        >
-                          {item.subItems.map((subItem) => (
-                            <Link
-                              key={subItem.name}
-                              to={subItem.href}
-                              onClick={() => setHoveredService(false)}
-                              className="block px-4 py-2 text-sm text-foreground hover:bg-gray-50 hover:text-primary transition-colors duration-200"
-                            >
-                              {subItem.name}
-                            </Link>
-                          ))}
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                ) : (
-                  <Link
-                    to={item.href}
-                    className={`text-foreground hover:text-primary transition-colors duration-200 py-2 ${
-                      location.pathname === item.href ? 'text-primary font-medium' : ''
-                    }`}
-                  >
-                    {item.name}
-                  </Link>
-                )}
-              </div>
-            ))}
-          </nav>
-
-          {/* Mobile menu button */}
-          <Button
-            variant="ghost"
-            size="sm"
-            className="lg:hidden"
-            aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={isMobileMenuOpen}
-            aria-controls="mobile-menu"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        <nav aria-label="Main" className="hidden items-center gap-9 text-[0.95rem] lg:flex">
+          <NavLink to="/" end className={linkClass}>Home</NavLink>
+          <NavLink to="/about" className={linkClass}>About</NavLink>
+          <div
+            className="relative"
+            onMouseEnter={() => setServicesOpen(true)}
+            onMouseLeave={() => setServicesOpen(false)}
+            onBlur={(e) => {
+              if (!e.currentTarget.contains(e.relatedTarget)) setServicesOpen(false);
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Escape') setServicesOpen(false);
+            }}
           >
-            {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </Button>
-        </div>
-
-        {/* Mobile Navigation */}
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              id="mobile-menu"
-              className="lg:hidden border-t border-gray-100 py-4"
+            <button
+              type="button"
+              aria-expanded={servicesOpen}
+              aria-controls="services-menu"
+              onClick={() => setServicesOpen((open) => !open)}
+              className={`flex items-center gap-1.5 py-2 transition-colors hover:text-white ${onService ? 'text-white' : 'text-white/75'}`}
             >
-              <nav className="flex flex-col space-y-4">
-                {navigation.map((item) => (
-                  <div key={item.name}>
-                    {item.subItems ? (
-                      <div>
-                        <span className="block text-foreground font-medium py-2">{item.name}</span>
-                        <div className="ml-4 space-y-2">
-                          {item.subItems.map((subItem) => (
-                            <Link
-                              key={subItem.name}
-                              to={subItem.href}
-                              className="block text-sm text-muted-foreground hover:text-primary transition-colors duration-200 py-1"
-                              onClick={() => setIsMobileMenuOpen(false)}
-                            >
-                              {subItem.name}
-                            </Link>
-                          ))}
-                        </div>
-                      </div>
-                    ) : (
-                      <Link
-                        to={item.href}
-                        className={`block text-foreground hover:text-primary transition-colors duration-200 py-2 ${
-                          location.pathname === item.href ? 'text-primary font-medium' : ''
-                        }`}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                      >
-                        {item.name}
-                      </Link>
-                    )}
-                  </div>
-                ))}
-              </nav>
-            </motion.div>
-          )}
-        </AnimatePresence>
+              Services
+              <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${servicesOpen ? 'rotate-180' : ''}`} />
+            </button>
+            <AnimatePresence>
+              {servicesOpen && (
+                <motion.div
+                  id="services-menu"
+                  initial={{ opacity: 0, y: -6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.18 }}
+                  className="absolute right-0 top-full w-[34rem] pt-4"
+                >
+                  <ul className="grid grid-cols-2 gap-px overflow-hidden rounded-sm bg-line shadow-2xl shadow-plum-deep/30">
+                    {SERVICES.map((s) => (
+                      <li key={s.href} className="bg-white">
+                        <NavLink
+                          to={s.href}
+                          className={({ isActive }) =>
+                            `block h-full p-5 text-ink transition-colors hover:bg-paper ${isActive ? 'bg-paper' : ''}`
+                          }
+                        >
+                          <span className="font-heading text-base">{s.name}</span>
+                          <span className="mt-1 block text-sm leading-snug text-slate">{s.summary}</span>
+                        </NavLink>
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+          <NavLink to="/contact" className="rounded-sm bg-gold px-5 py-2.5 font-semibold text-plum-deep transition-colors hover:bg-gold-soft">
+            Contact us
+          </NavLink>
+        </nav>
+
+        <button
+          type="button"
+          className="-mr-2 p-2 lg:hidden"
+          aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-menu"
+          onClick={() => setMobileOpen((open) => !open)}
+        >
+          {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </button>
       </div>
+
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.nav
+            id="mobile-menu"
+            aria-label="Main"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25 }}
+            className="overflow-hidden border-t border-white/15 lg:hidden"
+          >
+            <div className="max-h-[calc(100svh-72px)] overflow-y-auto px-5 pb-8 pt-4 sm:px-8">
+              <ul className="font-heading text-2xl">
+                <li><NavLink to="/" end className="block py-3">Home</NavLink></li>
+                <li><NavLink to="/about" className="block py-3">About</NavLink></li>
+              </ul>
+              <p className="mt-4 text-sm text-white/55">Services</p>
+              <ul className="mt-1 text-lg">
+                {SERVICES.map((s) => (
+                  <li key={s.href}><NavLink to={s.href} className="block py-2 text-white/85">{s.name}</NavLink></li>
+                ))}
+              </ul>
+              <NavLink
+                to="/contact"
+                className="mt-6 flex h-12 items-center justify-center rounded-sm bg-gold font-semibold text-plum-deep"
+              >
+                Contact us
+              </NavLink>
+            </div>
+          </motion.nav>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

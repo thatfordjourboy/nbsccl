@@ -31,7 +31,7 @@ export default function App() {
           <main className="flex-1">
             <ScrollToTop />
             <Seo />
-            <Suspense fallback={<div className="p-8" role="status">Loading...</div>}>
+            <Suspense fallback={<div className="min-h-[70vh]" role="status"><span className="sr-only">Loading</span></div>}>
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/about" element={<AboutPage />} />
