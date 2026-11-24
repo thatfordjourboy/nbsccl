@@ -23,7 +23,7 @@ export type ServicePageProps = {
 export function ServicePage(p: ServicePageProps) {
   return (
     <>
-      <PageHero title={p.title} intro={p.intro} image={p.image} imageAlt={p.imageAlt} crumb={{ label: 'Services', href: '/#services' }} />
+      <PageHero title={p.title} intro={p.intro} image={p.image} imageAlt={p.imageAlt} crumb={{ label: 'Our Businesses', href: '/#businesses' }} />
 
       {/* Offerings: sticky heading on the left, list on the right */}
       <section className="py-20 sm:py-28">
@@ -119,15 +119,18 @@ export function ServicePage(p: ServicePageProps) {
         </Container>
       </section>
 
-      {/* Other services */}
+      {/* Other businesses */}
       <section className="py-20 sm:py-24">
         <Container>
-          <SectionHeading title="Other services" />
-          <ul className="mt-10 grid gap-px overflow-hidden border border-line bg-line sm:grid-cols-2 lg:grid-cols-5">
+          <SectionHeading title="Other businesses" />
+          <ul className="mt-10 grid gap-px overflow-hidden border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
             {SERVICES.filter((s) => s.slug !== p.slug).map((s) => (
               <li key={s.slug} className="bg-paper">
                 <Link to={s.href} className="group flex h-full flex-col justify-between gap-8 p-6 transition-colors duration-300 hover:bg-brand hover:text-white">
-                  <span className="font-heading text-xl">{s.name}</span>
+                  <span className="font-heading text-xl">
+                    <span className="mr-2 text-sm text-gold tabular-nums group-hover:text-gold-soft">{s.number}</span>
+                    {s.name}
+                  </span>
                   <span className="flex items-end justify-between gap-4 text-sm text-slate group-hover:text-white/75">
                     {s.summary}
                     <ArrowUpRight className="h-5 w-5 shrink-0 text-brand transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-gold" />

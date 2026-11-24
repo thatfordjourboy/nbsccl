@@ -1,6 +1,6 @@
 # NB Sebastian Commodities Company Ltd.
 
-Corporate website for NB Sebastian: construction, commodities trading, manufacturing, gold purchasing and global trade.
+Corporate website for NB Sebastian Commodities Company Limited: construction and infrastructure, commodity trading, import and export, manufacturing, and general merchandise and supply.
 
 - **Working on the code?** Read [CLAUDE.md](CLAUDE.md) (rules, layout, commands).
 - **Status, open items, changelog:** [PROJECT.md](PROJECT.md).

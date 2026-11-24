@@ -4,6 +4,18 @@
   "framework": "vite",
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/gold",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/gold/(.*)",
+      "destination": "/",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",

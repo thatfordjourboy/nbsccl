@@ -5,36 +5,55 @@ export function ConstructionPage() {
   return (
     <ServicePage
       slug="construction"
-      title="Construction"
-      intro="Offices, homes, factories and roads, planned properly and handed over on time."
+      title="Construction & Infrastructure"
+      intro="Building construction, civil engineering and infrastructure development for public and private sector clients."
       image={unsplash('1541888946425-d81bb19240f5')}
       imageAlt="Site engineers walking a construction site"
       offerings={{
-        heading: 'What we build',
-        intro: 'Construction is where NB Sebastian began. We manage projects from first drawings to handover.',
+        heading: 'Capabilities',
+        intro: 'Construction is our flagship division. Capabilities below reflect the scope we pursue; project specifics are published as they are verified.',
         items: [
+          { title: 'Residential', description: 'Houses and apartment developments built for lasting comfort and structural integrity.' },
           { title: 'Commercial', description: 'Offices, shops and mixed-use buildings designed around the people who will use them.' },
-          { title: 'Residential', description: 'Houses and apartment blocks built to stay comfortable and solid for decades.' },
-          { title: 'Industrial', description: 'Factories and warehouses laid out so goods and people move efficiently.' },
-          { title: 'Infrastructure', description: 'Roads, bridges and public works that connect communities.' },
+          { title: 'Institutional infrastructure', description: 'Public-sector and institutional facilities delivered to agreed specifications.' },
+          { title: 'Educational facilities', description: 'Schools and related educational infrastructure for communities and institutions.' },
+          { title: 'Industrial construction', description: 'Factories, warehouses and industrial buildings laid out for efficient operations.' },
+          { title: 'Civil engineering', description: 'Civil works that support sites, utilities and public infrastructure.' },
+          { title: 'Road infrastructure', description: 'Road works that connect communities and support commercial activity.' },
+          { title: 'Renovation and rehabilitation', description: 'Upgrades and rehabilitation of existing structures and infrastructure.' },
+          { title: 'Project management', description: 'Coordination from planning through execution to handover.' },
         ],
       }}
-      showcase={{
-        heading: 'Featured projects',
+      groups={{
+        heading: 'Key opportunities',
+        intro: 'Proposed strategic priorities for this division — not confirmed contracts or awards.',
         items: [
-          { title: 'Manhattan Business Center', meta: 'Commercial, New York', description: 'A 50-storey commercial tower with sustainable design features.', image: unsplash('1486406146926-c627a92ad1ab', 900) },
-          { title: 'Riverside Residences', meta: 'Residential, London', description: 'A residential complex of 200 apartments.', image: unsplash('1545324418-cc1a3fa10c00', 900) },
-          { title: 'Tech Manufacturing Hub', meta: 'Industrial, Singapore', description: 'A manufacturing facility for technology companies.', image: unsplash('1587293852726-70cdb56c2866', 900) },
+          {
+            title: 'Public & institutional',
+            description: 'Government and institutional briefs where credible delivery matters.',
+            list: ['Government contracts', 'Educational facilities', 'Healthcare facilities', 'Public infrastructure'],
+          },
+          {
+            title: 'Civil & transport',
+            description: 'Infrastructure that enables commerce and community access.',
+            list: ['Road construction', 'Civil engineering works', 'Site infrastructure'],
+          },
+          {
+            title: 'Private development',
+            description: 'Private-sector building programmes across residential and commercial use.',
+            list: ['Residential developments', 'Commercial buildings', 'Industrial facilities'],
+          },
         ],
       }}
       assurances={{
-        heading: 'On every site',
+        heading: 'How we work on site',
         items: [
           { title: 'Checked at every stage', description: 'Each stage is inspected against the specification before the next one starts.' },
-          { title: 'On time, on budget', description: 'Schedule and costs are agreed before work begins, and you get progress reports throughout.' },
+          { title: 'Clear schedules and reporting', description: 'Programme and costs are agreed before work begins, with progress updates throughout.' },
+          { title: 'No unverified claims', description: 'Named project histories and awards are published only after client confirmation.' },
         ],
       }}
-      cta={{ heading: 'Planning a build?', text: 'Send us drawings or a short description and we will set up a site consultation.', label: 'Start a construction enquiry' }}
+      cta={{ heading: 'Planning a build?', text: 'Send drawings or a short description and we will arrange a consultation.', label: 'Start a construction enquiry' }}
     />
   );
 }

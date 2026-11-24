@@ -12,7 +12,7 @@ const req = (body: unknown, headers: Record<string, string> = {}) =>
   });
 
 test('accepts valid input and trims/strips newlines', () => {
-  const r = validate({ ...ok, name: '  Ama\r\nBcc: x@y.z  ', service: 'gold', phone: '' });
+  const r = validate({ ...ok, name: '  Ama\r\nBcc: x@y.z  ', service: 'construction', phone: '' });
   assert.equal(typeof r, 'object');
   assert.equal((r as { name: string }).name, 'Ama  Bcc: x@y.z');
   assert.equal((r as { phone?: string }).phone, undefined);

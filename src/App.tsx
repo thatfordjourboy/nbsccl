@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { MotionConfig } from 'motion/react';
 import { Suspense, lazy } from 'react';
 import { Header } from './components/Header';
@@ -13,9 +13,11 @@ const AboutPage = lazy(() => import('./components/pages/AboutPage').then(m => ({
 const ConstructionPage = lazy(() => import('./components/pages/ConstructionPage').then(m => ({ default: m.ConstructionPage })));
 const CommoditiesPage = lazy(() => import('./components/pages/CommoditiesPage').then(m => ({ default: m.CommoditiesPage })));
 const ImportExportPage = lazy(() => import('./components/pages/ImportExportPage').then(m => ({ default: m.ImportExportPage })));
-const GoldPage = lazy(() => import('./components/pages/GoldPage').then(m => ({ default: m.GoldPage })));
 const ManufacturingPage = lazy(() => import('./components/pages/ManufacturingPage').then(m => ({ default: m.ManufacturingPage })));
 const MerchandisePage = lazy(() => import('./components/pages/MerchandisePage').then(m => ({ default: m.MerchandisePage })));
+const ProjectsPage = lazy(() => import('./components/pages/ProjectsPage').then(m => ({ default: m.ProjectsPage })));
+const SustainabilityPage = lazy(() => import('./components/pages/SustainabilityPage').then(m => ({ default: m.SustainabilityPage })));
+const InsightsPage = lazy(() => import('./components/pages/InsightsPage').then(m => ({ default: m.InsightsPage })));
 const ContactPage = lazy(() => import('./components/pages/ContactPage').then(m => ({ default: m.ContactPage })));
 const PrivacyPolicyPage = lazy(() => import('./components/pages/PrivacyPolicyPage').then(m => ({ default: m.PrivacyPolicyPage })));
 const NotFoundPage = lazy(() => import('./components/pages/NotFoundPage').then(m => ({ default: m.NotFoundPage })));
@@ -38,12 +40,17 @@ export default function App() {
                 <Route path="/construction" element={<ConstructionPage />} />
                 <Route path="/commodities" element={<CommoditiesPage />} />
                 <Route path="/import-export" element={<ImportExportPage />} />
-                <Route path="/gold" element={<GoldPage />} />
                 <Route path="/manufacturing" element={<ManufacturingPage />} />
                 <Route path="/merchandise" element={<MerchandisePage />} />
+                <Route path="/projects" element={<ProjectsPage />} />
+                <Route path="/sustainability" element={<SustainabilityPage />} />
+                <Route path="/insights" element={<InsightsPage />} />
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="/privacy" element={<PrivacyPolicyPage />} />
                 <Route path="/terms" element={<TermsOfServicePage />} />
+                {/* Retired Gold Purchasing & Trading division — permanent redirect */}
+                <Route path="/gold" element={<Navigate to="/" replace />} />
+                <Route path="/gold/*" element={<Navigate to="/" replace />} />
                 <Route path="*" element={<NotFoundPage />} />
               </Routes>
             </Suspense>

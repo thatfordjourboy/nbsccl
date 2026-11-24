@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Logo } from './site/Logo';
-import { CONTACT, SERVICES, tel } from '../services';
+import { BRAND, CONTACT, SERVICES, tel } from '../services';
 
 export function Footer() {
   return (
@@ -10,12 +10,13 @@ export function Footer() {
           <div>
             <Logo className="h-11" />
             <p className="mt-6 max-w-xs text-sm">
-              Construction, commodities, freight, gold, manufacturing and merchandise. Based in Accra, Ghana.
+              {BRAND.supporting} Based in Accra, Ghana.
             </p>
+            <p className="mt-3 max-w-xs text-sm text-white/55">{BRAND.tagline}</p>
           </div>
 
-          <nav aria-label="Services">
-            <h2 className="font-heading text-sm text-white">Services</h2>
+          <nav aria-label="Our Businesses">
+            <h2 className="font-heading text-sm text-white">Our Businesses</h2>
             <ul className="mt-4 space-y-2 text-sm">
               {SERVICES.map((s) => (
                 <li key={s.href}><Link to={s.href} className="hover:text-white">{s.name}</Link></li>
@@ -26,7 +27,10 @@ export function Footer() {
           <nav aria-label="Company">
             <h2 className="font-heading text-sm text-white">Company</h2>
             <ul className="mt-4 space-y-2 text-sm">
-              <li><Link to="/about" className="hover:text-white">About us</Link></li>
+              <li><Link to="/about" className="hover:text-white">About Us</Link></li>
+              <li><Link to="/projects" className="hover:text-white">Projects &amp; Portfolio</Link></li>
+              <li><Link to="/sustainability" className="hover:text-white">Sustainability</Link></li>
+              <li><Link to="/insights" className="hover:text-white">Insights</Link></li>
               <li><Link to="/contact" className="hover:text-white">Contact</Link></li>
               <li><Link to="/privacy" className="hover:text-white">Privacy policy</Link></li>
               <li><Link to="/terms" className="hover:text-white">Terms of service</Link></li>
@@ -48,7 +52,7 @@ export function Footer() {
         </div>
 
         <p className="mt-14 border-t border-white/15 pt-8 text-xs text-white/50">
-          © {new Date().getFullYear()} NB Sebastian Commodities Company Limited. All rights reserved.
+          © {new Date().getFullYear()} {BRAND.legalName}. All rights reserved.
         </p>
       </div>
     </footer>

@@ -5,44 +5,62 @@ export function MerchandisePage() {
   return (
     <ServicePage
       slug="merchandise"
-      title="General merchandise"
-      intro="Electronics, apparel and business supplies, sourced from trusted makers and delivered to your door."
-      image={unsplash('1441986300917-64674bd600d8')}
-      imageAlt="A clothing store interior"
+      title="General Merchandise & Supply"
+      intro="Procurement and supply of commercial, industrial and institutional goods — a priority channel for recurring revenue."
+      image={unsplash('1553413077-190dd305871c')}
+      imageAlt="Warehouse aisles of institutional supplies"
       offerings={{
-        heading: 'What we provide',
+        heading: 'Capabilities',
         items: [
-          { title: 'Global sourcing', description: 'A wide supplier network, so one order can cover many product lines.' },
-          { title: 'Quality assurance', description: 'Products inspected against international standards.' },
-          { title: 'Inventory management', description: 'Warehousing that keeps stock ready for when you need it.' },
-          { title: 'Distribution', description: 'Delivery to your shops, sites or warehouses.' },
+          { title: 'Government procurement and supplies', description: 'Supply responses aligned to public-sector procurement processes.' },
+          { title: 'Institutional supplies', description: 'Goods for schools, hospitals, agencies and other institutions.' },
+          { title: 'Commercial merchandise', description: 'Commercial product lines for businesses and retailers.' },
+          { title: 'Industrial equipment', description: 'Equipment and tools that keep industrial operations running.' },
+          { title: 'Office equipment', description: 'Office and administrative equipment for corporate environments.' },
+          { title: 'Electrical supplies', description: 'Electrical goods and related supplies for projects and facilities.' },
+          { title: 'Building materials', description: 'Materials that support construction and rehabilitation programmes.' },
+          { title: 'Bulk procurement', description: 'Volume buying coordinated for efficiency and consistency.' },
+          { title: 'Corporate supply contracts', description: 'Ongoing supply relationships for private-sector clients.' },
         ],
       }}
       groups={{
-        heading: 'Product categories',
+        heading: 'Key opportunities',
+        intro: 'Proposed recurring-revenue priorities — not confirmed tenders or awards.',
         items: [
-          { title: 'Consumer electronics', description: 'Devices and appliances from established global brands.', list: ['Smartphones and tablets', 'Audio equipment', 'Home appliances', 'Computer accessories'] },
-          { title: 'Fashion and lifestyle', description: 'Clothing, footwear and home goods for a range of markets.', list: ['Apparel and clothing', 'Accessories', 'Footwear', 'Home decor'] },
-          { title: 'Industrial supplies', description: 'The everyday kit that keeps a business running.', list: ['Tools and equipment', 'Safety products', 'Office supplies', 'Packaging materials'] },
+          {
+            title: 'Public sector',
+            description: 'Larger, recurring institutional demand where delivery discipline matters.',
+            list: ['Government tenders', 'Institutional procurement', 'Medical supplies'],
+          },
+          {
+            title: 'Industrial & commercial',
+            description: 'Equipment and materials for private-sector operations.',
+            list: ['Industrial equipment', 'Office equipment', 'Building materials'],
+          },
+          {
+            title: 'Contracts',
+            description: 'Structured supply agreements that create predictable commercial relationships.',
+            list: ['Corporate supply contracts', 'Bulk procurement', 'Framework supply'],
+          },
         ],
       }}
       steps={{
-        heading: 'From supplier to shelf',
+        heading: 'From requirement to delivery',
         items: [
-          { title: 'Source', description: 'We find and vet suppliers for what you need.' },
-          { title: 'Inspect', description: 'Goods are checked and tested before they ship.' },
-          { title: 'Store', description: 'Stock is warehoused until you need it.' },
-          { title: 'Deliver', description: 'Products arrive at your locations.' },
+          { title: 'Define', description: 'We capture the product list, specifications and delivery locations.' },
+          { title: 'Source', description: 'Suppliers are identified and quoted against your requirements.' },
+          { title: 'Supply', description: 'Goods are procured, checked and staged for delivery.' },
+          { title: 'Deliver', description: 'Products arrive at your sites, offices or warehouses.' },
         ],
       }}
       assurances={{
         heading: 'Why buy through us',
         items: [
-          { title: 'One supplier, many lines', description: 'Our network covers products from many manufacturers, so you deal with one company.' },
-          { title: 'Checked quality', description: 'Every product held to international standards.' },
+          { title: 'One relationship, many lines', description: 'Procurement across categories under one commercial counterpart.' },
+          { title: 'Integrated delivery', description: 'Supply can combine with construction, import and manufacturing when the brief requires it.' },
         ],
       }}
-      cta={{ heading: 'Stocking up?', text: 'Send a product list or the categories you need, and we will quote supply.', label: 'Request a product quote' }}
+      cta={{ heading: 'Stocking up or tendering?', text: 'Send a product list, tender reference or the categories you need, and we will respond.', label: 'Request a supply quote' }}
     />
   );
 }

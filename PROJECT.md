@@ -9,9 +9,9 @@ Draft. Code is pre-launch ready; launch is blocked on the **client** and **deplo
 ## Open items
 
 ### Blocked on client (content / legal)
-- [ ] **Confirm or remove business claims**: "25+ years", "50+ countries", "1000+ projects", "over two decades" (HomePage, AboutPage, Footer, HomePage hero). Unverifiable claims are a legal risk, especially for gold purchasing.
-- [ ] **Construction "Featured projects" look like template filler**: Manhattan Business Center (New York), Riverside Residences (London), Tech Manufacturing Hub (Singapore). Replace them with real projects or remove the section (`ConstructionPage.tsx`, `showcase`).
-- [ ] **Manufacturing certifications**: the site claims ISO 9001:2015, ISO 14001 and "Industry 4.0". Confirm the certificates exist or remove them (`ManufacturingPage.tsx`). The Gold page claims a "99.9% purity guarantee" and "licensed precious metals dealers": confirm the licence.
+- [ ] **Confirm founding timeline and operating statistics** before restoring hard numbers (years, countries, project counts). Soft placeholders are live for now.
+- [ ] **Construction portfolio**: replace the Projects page placeholders with verified Ghana / West Africa project entries when the client supplies them.
+- [ ] **Manufacturing**: confirm which capabilities are owned vs partner-delivered; add certifications only when certificates exist.
 - [ ] **Founding year and timeline** (About page: 2000 founding, 2005 international office, etc.) need confirming along with the figures, which now live in one place: `FIGURES` in `src/services.ts`.
 - [ ] **One email domain**: the site uses `@nbsebastian.com` and a Gmail address, and the site domain is `nbsccl.com`. Pick one domain and confirm `info@`, `sales@`, `privacy@`, `legal@` receive mail.
 - [ ] **Exact map location**: the map is a search for "Inkoom Hospital, Spintex Road". Replace it with an embed of the office's own Google Business pin (`ContactPage.tsx`).
@@ -45,6 +45,15 @@ Draft. Code is pre-launch ready; launch is blocked on the **client** and **deplo
 - **2026-10-10**: Page titles use the `"<Page> - NBSCCL"` format (kept from commit 8b0a5a4).
 
 ## Changelog
+
+### 2026-11-24: Five divisions; retire Gold Purchasing
+- Removed Gold Purchasing & Trading entirely (page, nav, homepage spotlight, ticker, enquiry options, SEO, structured data). `/gold` permanently redirects to `/`.
+- Site now presents exactly five divisions: Construction & Infrastructure (flagship), Commodity Trading, Import & Export, Manufacturing, General Merchandise & Supply.
+- Homepage hero and Our Businesses layout updated (featured construction + 2×2 grid). Brand messaging: “Built on Capability. Defined by Delivery.”
+- Navigation: Home, About Us, Our Businesses, Projects & Portfolio, Sustainability, Insights, Contact; CTA “Partner With Us”.
+- Added Insights (strategic opportunities as proposed directions, with disclaimer), Projects & Portfolio, and Sustainability pages.
+- Softened unverified operating statistics; manufacturing page distinguishes direct vs partner delivery; removed fabricated featured construction projects.
+- Enquiry categories: General, five divisions, Procurement & Tender Opportunities, Strategic Partnerships.
 
 ### 2026-10-10: Technical SEO
 - **Fixed broken link previews and canonicals**: every `og:image`, canonical, `og:url`, sitemap entry and robots.txt pointed at `www.nbsccl.com`, which does not resolve. The site URL now comes from one place (`scripts/site-url.mjs`): `nbsccl.vercel.app` today, the custom domain automatically once connected.

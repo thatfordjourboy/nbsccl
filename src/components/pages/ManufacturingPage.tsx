@@ -6,35 +6,52 @@ export function ManufacturingPage() {
     <ServicePage
       slug="manufacturing"
       title="Manufacturing"
-      intro="Parts and equipment made to your specification, with quality checked at every stage."
+      intro="Industrial manufacturing and customized production solutions — delivered directly and through strategic manufacturing partners."
       image={unsplash('1513828583688-c52646db42da')}
       imageAlt="Pipework and machinery in an industrial plant"
       offerings={{
         heading: 'Capabilities',
+        intro: 'We distinguish work we coordinate directly from production delivered through strategic manufacturing partners. We do not claim owned factory footprints that have not been verified for publication.',
         items: [
-          { title: 'Precision engineering', description: 'Tight tolerances, held by inspection at every stage.' },
-          { title: 'Automation', description: 'Automated, connected production lines for consistent output.' },
-          { title: 'Custom production', description: 'Production runs sized to your specification and volumes.' },
-          { title: 'Quality assurance', description: 'ISO-certified processes keep every batch consistent.' },
+          { title: 'Industrial production', description: 'Production runs coordinated for industrial and commercial requirements.' },
+          { title: 'Customized manufacturing', description: 'Made-to-specification work sized to your drawings and volumes.' },
+          { title: 'Contract manufacturing', description: 'Production arranged under contract, including via manufacturing partners.' },
+          { title: 'Product development', description: 'Support for developing products destined for local or export markets.' },
+          { title: 'Material processing', description: 'Processing and preparation of materials where the brief requires it.' },
+          { title: 'Production coordination', description: 'Scheduling, quality checkpoints and logistics around the production run.' },
+          { title: 'Industrial partnerships', description: 'Strategic partnerships with manufacturers for capability we do not operate in-house.' },
         ],
       }}
-      showcase={{
-        heading: 'Industries we serve',
+      groups={{
+        heading: 'Key opportunities',
+        intro: 'Long-term industrial growth priorities — proposed directions, not confirmed plant investments.',
         items: [
-          { title: 'Automotive components', description: 'High-precision parts made to strict quality standards.', image: unsplash('1558618666-fcd25c85cd64', 900) },
-          { title: 'Electronics', description: 'Electronic components and circuit board assembly.', image: unsplash('1581091226825-a6a2a5aee158', 900) },
-          { title: 'Industrial equipment', description: 'Components for heavy machinery and industrial equipment.', image: unsplash('1504917595217-d4dc5ebe6122', 900) },
+          {
+            title: 'Local production',
+            description: 'Building domestic capacity where it creates lasting commercial value.',
+            list: ['Local production', 'Import substitution', 'Material processing'],
+          },
+          {
+            title: 'Contract & private label',
+            description: 'Production programmes for brands and institutional buyers.',
+            list: ['Contract manufacturing', 'Private-label products', 'Custom runs'],
+          },
+          {
+            title: 'Partnerships',
+            description: 'Industrial partners that extend what we can deliver under one commercial relationship.',
+            list: ['Industrial partnerships', 'Production coordination', 'Quality oversight'],
+          },
         ],
       }}
       assurances={{
-        heading: 'Quality and certifications',
+        heading: 'Clear about ownership',
         items: [
-          { title: 'ISO 9001:2015', description: 'Quality management.' },
-          { title: 'ISO 14001', description: 'Environmental management.' },
-          { title: 'Industry 4.0', description: 'Smart, connected manufacturing.' },
+          { title: 'Direct vs partner delivery', description: 'We state when work is delivered through strategic manufacturing partners rather than owned facilities.' },
+          { title: 'No invented factories', description: 'Facility claims, certifications and capacity figures are published only after verification.' },
+          { title: 'Specification-led', description: 'Quotes start from your drawings, samples or written requirements.' },
         ],
       }}
-      cta={{ heading: 'Need something made?', text: 'Send a specification, drawing or sample and we will quote the production run.', label: 'Request a manufacturing quote' }}
+      cta={{ heading: 'Need something made?', text: 'Send a specification, drawing or sample and we will advise on direct or partner production.', label: 'Request a manufacturing quote' }}
     />
   );
 }
