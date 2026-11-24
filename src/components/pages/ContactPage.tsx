@@ -6,7 +6,7 @@ import { Input } from '../ui/input';
 import { Textarea } from '../ui/textarea';
 import { Label } from '../ui/label';
 import { Container, PageHero } from '../site/blocks';
-import { CONTACT, SERVICES, tel } from '../../services';
+import { CONTACT, ENQUIRY_CATEGORIES, tel } from '../../services';
 
 const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY as string | undefined;
 
@@ -18,7 +18,7 @@ export function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [searchParams] = useSearchParams();
   const requested = searchParams.get('service') ?? '';
-  const presetService = requested === 'other' || SERVICES.some((s) => s.slug === requested) ? requested : '';
+  const presetService = ENQUIRY_CATEGORIES.some((c) => c.slug === requested) ? requested : '';
 
   useEffect(() => {
     if (!TURNSTILE_SITE_KEY || document.getElementById('turnstile-script')) return;
@@ -57,8 +57,8 @@ export function ContactPage() {
   return (
     <>
       <PageHero
-        title="Contact us"
-        intro="Tell us about your project, shipment or order. We reply within 24 hours."
+        title="Partner with us"
+        intro="Tell us about your project, tender, shipment, supply requirement or partnership. We reply within 24 hours."
       />
 
       <section className="py-16 sm:py-24">
@@ -93,14 +93,12 @@ export function ContactPage() {
                 id="service"
                 name="service"
                 key={presetService}
-                defaultValue={presetService}
+                defaultValue={presetService || 'general'}
                 className="flex h-11 w-full rounded-md border border-input bg-input-background px-3 text-base outline-none focus-visible:border-brand md:text-sm"
               >
-                <option value="">Choose a service</option>
-                {SERVICES.map((s) => (
-                  <option key={s.slug} value={s.slug}>{s.name}</option>
+                {ENQUIRY_CATEGORIES.map((c) => (
+                  <option key={c.slug} value={c.slug}>{c.label}</option>
                 ))}
-                <option value="other">Something else</option>
               </select>
             </Field>
             <Field id="message" label="Message" required>

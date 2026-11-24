@@ -26,7 +26,7 @@ npm run preview    # serve build/
 | `src/routes.json` | **Single source of truth for routes**: path, `<title>`, meta description. Used by `Seo.tsx`, `scripts/prerender.mjs` and the sitemap. |
 | `src/App.tsx` | Routes (router-agnostic). Pages are lazy-loaded. `main.tsx` wraps it in `BrowserRouter` and hydrates; `entry-server.tsx` wraps it in `StaticRouter` for build-time rendering. |
 | `src/components/pages/` | One file per page. |
-| `src/services.ts` | The six business lines (name, link, summary, image), contact details and company figures. Header, footer, home page and contact form all read from here. |
+| `src/services.ts` | The five business divisions (name, link, summary, image), enquiry categories, brand copy, contact details and soft figures. Header, footer, home page and contact form all read from here. |
 | `src/components/site/` | Design-system building blocks: `PageHero`, `SectionHeading`, `Steps`, `ContactBand`, `Container`, `ServicePage` template, `HeroMap`, `Ticker`, `Logo`. |
 | `src/components/ui/` | Kept shadcn components (button, input, label, textarea, sonner). Delete what you stop using. |
 | `src/index.css` | Tailwind source: brand tokens, font, `font-display` / `font-heading` utilities. Compiled at build time. |
@@ -56,9 +56,9 @@ The sitemap and prerendered HTML update automatically.
 - **Colours** (client choice, 2026-10-10): `brand` #1E3A32 forest green (header, heroes), `brand-deep` #142822 (footer, contact band, gold spotlight), `brand-soft` (hover), `gold` #DDB84F (accent **on brand surfaces only**; it fails contrast on light backgrounds), `paper` (page background), `ink` (text), `slate` (secondary text), `line` (rules). Use the tokens, never raw hex or Tailwind palette colours like `blue-600`. The logo needs a dark `brand` surface behind it.
 - **Type**: Archivo variable only. `font-display` (expanded, heavy) for hero and page titles and big service names; `font-heading` for section and item headings; normal Archivo for body. Sentence case everywhere; no all-caps labels.
 - **Layout**: left-aligned; `Container` for width; sections are `py-20 sm:py-28`. Lists separated by hairline rules, not rows of identical icon cards. Don't add icon tiles.
-- **New service page** = data passed to `ServicePage` (see `GoldPage.tsx`). Add the service to `src/services.ts` and `src/routes.json` too.
-- **Motion budget**: the home hero sequence (`HeroMap` + headline), the photo opening in `PageHero`, the `Ticker`, scroll-drawn `Steps` lines (only for real sequences), and hover responses. Don't add fade-up-on-scroll to sections. Everything must respect reduced motion (`MotionConfig reducedMotion="user"`, `useReducedMotion`, `motion-reduce:`).
-- **Copy**: plain, specific, sentence case. Buttons say what happens ("Request a gold quote"), not "Learn more". Don't invent facts about the company: only use what the client has provided (see PROJECT.md open items).
+- **New division page** = data passed to `ServicePage` (see `ConstructionPage.tsx`). Add the division to `src/services.ts` and `src/routes.json` too. Do not reintroduce gold purchasing.
+- **Motion budget**: the home hero sequence (photo + headline), the photo opening in `PageHero`, the `Ticker`, scroll-drawn `Steps` lines (only for real sequences), and hover responses. Don't add fade-up-on-scroll to sections. Everything must respect reduced motion (`MotionConfig reducedMotion="user"`, `useReducedMotion`, `motion-reduce:`).
+- **Copy**: plain, specific, sentence case. Buttons say what happens ("Request a freight quote"), not "Learn more". Don't invent facts about the company: only use what the client has provided (see PROJECT.md open items).
 
 ### SEO and rendering (do not regress)
 - Every page is server-rendered at build time and hydrated in the browser. **Components must be SSR-safe**: never touch `window`, `document`, `localStorage` or `matchMedia` during render or in `useState` initialisers; do it in `useEffect`. Server and first client render must produce the same markup (a mismatch shows up as a console error; `csp-check` style tests catch it).

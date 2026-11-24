@@ -2,7 +2,16 @@
 // Env: RESEND_API_KEY, CONTACT_TO_EMAIL, CONTACT_FROM_EMAIL (required to deliver mail)
 //      TURNSTILE_SECRET_KEY (optional; when set, a valid Cloudflare Turnstile token is required)
 
-const SERVICES = ['construction', 'commodities', 'import-export', 'gold', 'manufacturing', 'merchandise', 'other'];
+const SERVICES = [
+  'general',
+  'construction',
+  'commodities',
+  'import-export',
+  'manufacturing',
+  'merchandise',
+  'procurement',
+  'partnerships',
+];
 // Conservative: no quotes, angle brackets, commas or semicolons, so Reply-To can only ever hold one address.
 const EMAIL_RE = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}$/;
 const MAX_BODY_BYTES = 10_000;

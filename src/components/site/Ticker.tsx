@@ -1,7 +1,8 @@
-// Goods we trade, from the Commodities and Merchandise pages. Pure CSS marquee; pauses on hover and for reduced motion.
+// Goods and capability themes we pursue across commodity trading, import/export and merchandise supply.
 const GOODS = [
-  'Cocoa', 'Coffee', 'Grains and cereals', 'Sugar and spices', 'Livestock feed', 'Gold', 'Steel and metals',
-  'Crude oil', 'Natural gas', 'Chemicals', 'Plastics', 'Textiles', 'Tools and equipment', 'Industrial supplies',
+  'Cocoa', 'Coffee', 'Grains and cereals', 'Sugar and spices', 'Livestock feed', 'Steel and metals',
+  'Building materials', 'Industrial equipment', 'Office equipment', 'Electrical supplies',
+  'Chemicals', 'Plastics', 'Textiles', 'Tools and equipment', 'Institutional supplies',
 ];
 
 export function Ticker() {
@@ -16,7 +17,7 @@ export function Ticker() {
     </ul>
   );
   return (
-    <section aria-label="Goods we trade" className="group overflow-hidden border-b border-brand-deep/20 bg-gold py-5 text-brand-deep">
+    <section aria-label="Goods and supplies we work with" className="group overflow-hidden border-b border-brand-deep/20 bg-gold py-5 text-brand-deep">
       <div className="flex w-max animate-[ticker_45s_linear_infinite] group-hover:[animation-play-state:paused] motion-reduce:animate-none">
         {row(false)}
         {row(true)}
