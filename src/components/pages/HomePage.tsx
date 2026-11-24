@@ -36,7 +36,7 @@ export function HomePage() {
         <ImageWithFallback
           src={unsplash('1503387762-592deb58ef4e', 2000)}
           alt=""
-          fetchpriority="high"
+          {...{ fetchpriority: 'high' }}
           className="absolute inset-0 h-full w-full object-cover"
         />
         <div
